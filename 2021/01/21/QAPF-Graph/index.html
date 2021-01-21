@@ -8,13 +8,13 @@
   <meta name="theme-color" content="#fff" id="theme-color">
   <meta name="description" content="Bi Hop">
   <link rel="icon" href="/img/icon.png">
-  <title>LinuxNotes</title>
+  <title>QAPF Graph</title>
   
   
-  <meta property="og:title" content="LinuxNotes">
+  <meta property="og:title" content="QAPF Graph">
   
   
-  <meta property="og:url" content="https://marcusxe.github.io/2021/01/18/LinuxNotes/index.html">
+  <meta property="og:url" content="https://marcusxe.github.io/2021/01/21/QAPF-Graph/index.html">
   
   
   <meta property="og:img" content="/img/icon.png">
@@ -22,7 +22,7 @@
   
   
   <meta property="og:type" content="article">
-  <meta property="og:article:published_time" content="2021-01-18">
+  <meta property="og:article:published_time" content="2021-01-21">
   <meta property="og:article:modified_time" content="2021-01-21">
   <meta property="og:article:author" content="Marcus Xe">
   
@@ -189,55 +189,144 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      LinuxNotes
+      QAPF Graph
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2021-01-18T14:24:52.000Z">
+    <time datetime="2021-01-21T08:05:03.000Z">
       <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
-      <span>2021-01-18</span>
+      <span>2021-01-21</span>
     </time>
     
     
     <span class="dot"></span>
-    <span>110 words</span>
+    <span>1.1k words</span>
     
   </div>
   
   </header>
   <div id="section" class="post-content">
-    <h3 id="Zsh"><a href="#Zsh" class="headerlink" title="Zsh"></a>Zsh</h3><ul>
-<li>Chinese Characters shows  in the form of it’s code as <code>\245</code>  ,Zsh is to blame.</li>
-</ul>
-<p>Add </p>
-<pre class="highlight"><span class="line"><span class="built_in">export</span> LC_ALL=en_US.UTF-8  </span><br><span class="line"><span class="built_in">export</span> LANG=en_US.UTF-8 </span><br></pre>
-<p>to <code>.zshrc</code> works.</p>
-<h3 id="xfce4-terminal"><a href="#xfce4-terminal" class="headerlink" title="xfce4-terminal"></a>xfce4-terminal</h3><ul>
-<li>Random error code on special chars.as ? or other unrecognized form.</li>
-</ul>
-<p>Change it’s encoding to <code> Unicode-&gt;UTF 8</code>works.</p>
-<p>###Linux kernel(arch as an example)</p>
-<h4 id="Change-kernel"><a href="#Change-kernel" class="headerlink" title="Change kernel"></a>Change kernel</h4><ol>
-<li>install first.</li>
-<li>make grub detect it.<pre class="highlight"><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></li>
-<li>Reboot to target kernel.</li>
-<li>Remove unnessaries.<br>Done</li>
-</ol>
-<hr>
-<h4 id="Remove-module-from-kernel"><a href="#Remove-module-from-kernel" class="headerlink" title="Remove module from kernel."></a>Remove module from kernel.</h4><p>1.</p>
-<pre class="highlight"><span class="line">mkdir /etc/modprobe.d/</span><br><span class="line">vim /etc/modprobe.d/blacklist.conf</span><br></pre>
-<p>add <code>!xxxx</code> to this file.</p>
+    <h1 id="QAPF-图"><a href="#QAPF-图" class="headerlink" title="QAPF 图"></a>QAPF 图</h1><p>根据IUGS提出的QAPFM分类方案中,铁镁质(mafic)矿物含量体积分数低于90%的岩石根据其所含矿物含量(体积分数)分类,分类参照矿物如下:</p>
 <ul>
-<li>build the kernel from scratch works as well,but ….</li>
+<li>Q Quartz/石英石</li>
+<li>A Alkali-Feldspar/碱性长石</li>
+<li>P Plagioclase Feldspar/斜长石</li>
+<li>F Feldspathoids/副长石</li>
+</ul>
+<p>岩石的成分与种类的对应关系绘制成菱形的坐标系统,即QAPF图,也被称为Streckeisen图(以原始文章的作者命名)。它由两个三角图(Q,A,P)和(F,A,P)组成,两图以AP边为公共边. 角的顶点代表只由一种长英质岩(felsic)组成, 也即是完全由石英石,碱性长石,斜长石,副长石中某一类矿物组成.</p>
+<p>由于火山岩中的副长石和石英是不共存的，因此QAPF分类始终基于最多3个分量（QAP或APF），即岩石的成分绘制时最终定位在在上部或下部三角形中。</p>
+<p>QAPF图被分成15个基本<strong>区域</strong>,每个区域都是根据坐标意义下的矿物成分区分不同的岩石.</p>
+<p>两幅QAPF图中,一个用于粗粒（深成岩）或侵入性火成岩，一个用于细粒（火山岩）或喷出性火成岩。 它们大多具有相似的区域划分，因此大多数火山岩具有相应的矿物学等价的深成岩（例如流纹岩和花岗岩）。 某些区域被分配了2到3种岩石类型，可进一步根据其镁铁质矿物含量或斜长石类型（钙质或钠质）加以区分。</p>
+<ul>
+<li><p>本文中 深成岩等价侵入岩,火山岩等价喷出岩,不再进一步区分.</p>
+</li>
+<li><p>(铁镁质)<em>vol</em>&gt;90%  超铁镁质火成岩</p>
+</li>
 </ul>
 <hr>
+<h2 id="深成岩"><a href="#深成岩" class="headerlink" title="深成岩"></a>深成岩</h2><ul>
+<li><p>1 Quartz-Rich Granitoid/富石英花岗岩</p>
+</li>
+<li><p>1a Quartzolite/石英岩</p>
+</li>
+<li><p>2 Alkali-Feldspar Granite/碱性花岗岩</p>
+</li>
+<li><p>3 Granite (3a: Syenogranite - 3b: Monzogranite)/花岗岩(3a:正长花岗岩,3b:二长花岗岩)</p>
+</li>
+<li><p>4 Granodiorite/花岗闪长岩</p>
+</li>
+<li><p>5 Tonalite/英云闪长岩</p>
+</li>
+<li><p>6 Alkali-Feldspar Syenite/碱长正长岩</p>
+</li>
+<li><p>6* Quartz-Bearing Alkali-Feldspar Syenite/石英碱长正长岩</p>
+</li>
+<li><p>6’ Foid-Bearing Alkali-Feldspar Syenite/含副长石碱长正长岩</p>
+</li>
+<li><p>7 Syenite/正长岩</p>
+</li>
+<li><p>7* Quartz-Bearing Syenite/石英正长岩</p>
+</li>
+<li><p>7’ Foid-Bearing Syenite/含副长石正长岩</p>
+</li>
+<li><p>8 Monzonite/二长岩</p>
+</li>
+<li><p>8* Quartz-Monzonite/石英二长岩</p>
+</li>
+<li><p>8’ Foid-Monzonite/含副长石二长岩</p>
+</li>
+<li><p>9 Monzodiorite / Monzogabbro 二长闪长岩/二长辉长岩</p>
+</li>
+<li><p>9* Quartz-Monzodiorite / Quartz-Monzogabbro石英二长闪长岩/石英二长辉长岩</p>
+</li>
+<li><p>9’ Foid-Monzodiorite / Foid-Monzogabbro 含副长石二长闪长岩/含副长石二长辉长岩</p>
+</li>
+<li><p>10 Diorite / Gabbro / Anorthosite 闪长岩/辉长岩/斜长岩</p>
+</li>
+<li><p>10* Quartz-Diorite / Quartz-Gabbro 石英闪长岩/石英辉长岩</p>
+</li>
+<li><p>10’ Foid-Bearing Diorite / Foid-Bearing Gabbro 含副长石闪长岩/含副长石辉长岩</p>
+</li>
+<li><p>11 Foid-Syenite (Foyaite) 副长石正长岩(流霞正长岩)</p>
+</li>
+<li><p>12 Foid-Monzosyenite 副长石二长正长岩</p>
+</li>
+<li><p>13 Foid-Monzodiorite (Essexite)副长石二长闪长岩(黑斑闪长岩)</p>
+</li>
+<li><p>14 Foid-Diorite 副长石闪长岩</p>
+</li>
+<li><p>15 Foidolite 副长石岩</p>
+<p><img src="/.io//plutonicRocksQAPF.jpg" alt="Plutonic Rocks" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/.io//plutonicRocksQAPF.jpg" class="lozad post-image"></p>
+</li>
+</ul>
+<hr>
+<h2 id="火山岩"><a href="#火山岩" class="headerlink" title="火山岩"></a>火山岩</h2><ul>
+<li>1 Not Defined 未定义</li>
+<li>2 Alkali-Feldspar Rhyolite 碱长流纹岩</li>
+<li>3 Rhyolite 流纹岩</li>
+<li>4 Dacite 英安岩</li>
+<li>5 Plagidacite 斜英安岩</li>
+<li>6 Alkali-Feldspar Trachyte 碱长粗面岩</li>
+<li>6* Quartz-Bearing Alkali-Feldspar Trachyte 石英碱长粗面岩</li>
+<li>6’ Foid-Bearing Alkali-Feldspar Trachyte 含副长石碱长粗面岩</li>
+<li>7 Trachyte 粗面岩</li>
+<li>7* Quartz-Trachyte 石英粗面岩</li>
+<li>7’ Foid-Bearing Trachyte 含副长石粗面岩</li>
+<li>8 Latite 安粗岩</li>
+<li>8* Quartz-Latite 石英安粗岩</li>
+<li>8’ Foid-Bearing Latite 含副长石安粗岩</li>
+<li>9 Andesite 安山岩</li>
+<li>9* Quartz-Bearing Andesite  石英安山岩</li>
+<li>9’ Foid-Bearing Andesite  含副长石安山岩</li>
+<li>10 Basalt 玄武岩</li>
+<li>10* Quartz-Bearing Basalt 石英玄武岩</li>
+<li>10’ Foid-Bearing Basalt 含副长石玄武岩</li>
+<li>11 Phonolite 响岩</li>
+<li>12 Tephritic Phonolite 碱玄质响岩</li>
+<li>13 Phonolitic Tephrite / Phonolitic Basanite 响岩质碧玄岩/响岩质碱玄岩/</li>
+<li>14 Tephrite / Basanite 碧玄岩/碱玄岩</li>
+<li>15a Phonolitic Foidite 响岩质副长石岩</li>
+<li>15b Tephritic Foidite 碱玄质副长石岩</li>
+<li>15c Foidite 响岩质副长石岩</li>
+</ul>
+<p><img src="/.io//volcanicRocksQAPF.jpg" alt="03835970014950542173496.jpg" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/.io//volcanicRocksQAPF.jpg" class="lozad post-image"></p>
+<hr>
+<h2 id="读图方法"><a href="#读图方法" class="headerlink" title="读图方法"></a>读图方法</h2><p>首先明确此方法仅$(铁镁矿)_{vol}\le 90%$的火成岩(深成岩和火山岩).</p>
+<ol>
+<li>确定是深成岩还是火成岩,选择对应图.</li>
+<li>确定酸碱性(含石英还是副长石)对应上下三角.</li>
+<li>确定主顶点体积分数(以Q为例)$\alpha=\frac{Q}{A+P}$,从Q点对边向上数横线,每条线代表$10%$.</li>
+<li>确定剩下成分比例$\beta=\frac{A}{A+P}$从Q点引射线交与AP边,$6^\circ$代表$10%$.</li>
+<li>交点即为岩石种类.</li>
+</ol>
+<p>参考资料:</p>
 
   </div>
   <div>
   
   <div class="post-note note-warning copyright" style="margin-top: 42px">
     <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://marcusxe.github.io/about">Marcus Xe</a></p>
-    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://marcusxe.github.io/2021/01/18/LinuxNotes/">https://marcusxe.github.io/2021/01/18/LinuxNotes/</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://marcusxe.github.io/2021/01/21/QAPF-Graph/">https://marcusxe.github.io/2021/01/21/QAPF-Graph/</a></p>
     <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
   </div>
   
@@ -245,24 +334,24 @@
 </article>
 <div class="nav">
   
-  <div class="nav-item-prev">
-    <a href="/2021/01/21/QAPF-Graph/" class="nav-link">
-      <i class="iconfont icon-left nav-prev-icon"></i>
+  
+  <div class="nav-item-next">
+    <a href="/2021/01/18/LinuxNotes/" class="nav-link">
       <div>
-        <div class="nav-label">Prev</div>
+        <div class="nav-label">Next</div>
         
-        <div class="nav-title">QAPF Graph </div>
+        <div class="nav-title">LinuxNotes </div>
         
       </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
     </a>
   </div>
-  
   
 </div>
 
 <div class="card card-content toc-card" id="mobiletoc">
   <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh"><span class="toc-text">Zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xfce4-terminal"><span class="toc-text">xfce4-terminal</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-kernel"><span class="toc-text">Change kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-module-from-kernel"><span class="toc-text">Remove module from kernel.</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#QAPF-%E5%9B%BE"><span class="toc-text">QAPF 图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E6%88%90%E5%B2%A9"><span class="toc-text">深成岩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%AB%E5%B1%B1%E5%B2%A9"><span class="toc-text">火山岩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%9B%BE%E6%96%B9%E6%B3%95"><span class="toc-text">读图方法</span></a></li></ol></li></ol>
 </div></main>
           <aside class="left-column">
             
@@ -295,7 +384,7 @@
   <article class="display-when-two-columns spacer">
     <div class="card card-content toc-card">
       <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh"><span class="toc-text">Zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xfce4-terminal"><span class="toc-text">xfce4-terminal</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-kernel"><span class="toc-text">Change kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-module-from-kernel"><span class="toc-text">Remove module from kernel.</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#QAPF-%E5%9B%BE"><span class="toc-text">QAPF 图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E6%88%90%E5%B2%A9"><span class="toc-text">深成岩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%AB%E5%B1%B1%E5%B2%A9"><span class="toc-text">火山岩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%9B%BE%E6%96%B9%E6%B3%95"><span class="toc-text">读图方法</span></a></li></ol></li></ol>
     </div>
   </article>
   
@@ -327,7 +416,7 @@
   
   <article class="card card-content toc-card">
     <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh"><span class="toc-text">Zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xfce4-terminal"><span class="toc-text">xfce4-terminal</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-kernel"><span class="toc-text">Change kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-module-from-kernel"><span class="toc-text">Remove module from kernel.</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#QAPF-%E5%9B%BE"><span class="toc-text">QAPF 图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E6%88%90%E5%B2%A9"><span class="toc-text">深成岩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%AB%E5%B1%B1%E5%B2%A9"><span class="toc-text">火山岩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%9B%BE%E6%96%B9%E6%B3%95"><span class="toc-text">读图方法</span></a></li></ol></li></ol>
   </article>
   
   
