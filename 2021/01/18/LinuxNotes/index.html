@@ -98,6 +98,9 @@
   
   
   
+  <link rel="prefetch" href="//cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-svg.js" as="script">
+  
+  
   
   
   
@@ -119,7 +122,9 @@
   
   
   
-<meta name="generator" content="Hexo 5.3.0"></head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
 
 
 <body>
@@ -200,7 +205,7 @@
     
     
     <span class="dot"></span>
-    <span>110 words</span>
+    <span>109 words</span>
     
   </div>
   
@@ -215,23 +220,16 @@
 <h3 id="xfce4-terminal"><a href="#xfce4-terminal" class="headerlink" title="xfce4-terminal"></a>xfce4-terminal</h3><ul>
 <li>Random error code on special chars.as ? or other unrecognized form.</li>
 </ul>
-<p>Change it’s encoding to <code> Unicode-&gt;UTF 8</code>works.</p>
-<p>###Linux kernel(arch as an example)</p>
-<h4 id="Change-kernel"><a href="#Change-kernel" class="headerlink" title="Change kernel"></a>Change kernel</h4><ol>
+<p>Change it’s encoding to <code>Unicode-&gt;UTF 8</code>works.</p>
+<h3 id="Linux-kernel-arch-as-an-example"><a href="#Linux-kernel-arch-as-an-example" class="headerlink" title="Linux kernel(arch as an example)"></a>Linux kernel(arch as an example)</h3><h4 id="Change-kernel"><a href="#Change-kernel" class="headerlink" title="Change kernel"></a>Change kernel</h4><ol>
 <li>install first.</li>
 <li>make grub detect it.<pre class="highlight"><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></li>
 <li>Reboot to target kernel.</li>
 <li>Remove unnessaries.<br>Done</li>
 </ol>
 <hr>
-<h4 id="Remove-module-from-kernel"><a href="#Remove-module-from-kernel" class="headerlink" title="Remove module from kernel."></a>Remove module from kernel.</h4><p>1.</p>
-<pre class="highlight"><span class="line">mkdir /etc/modprobe.d/</span><br><span class="line">vim /etc/modprobe.d/blacklist.conf</span><br></pre>
-<p>add <code>!xxxx</code> to this file.</p>
-<ul>
-<li>build the kernel from scratch works as well,but ….</li>
-</ul>
-<hr>
-
+<h4 id="Remove-module-from-kernel"><a href="#Remove-module-from-kernel" class="headerlink" title="Remove module from kernel."></a>Remove module from kernel.</h4><p>1.<br><pre class="highlight"><span class="line">mkdir /etc/modprobe.d/</span><br><span class="line">vim /etc/modprobe.d/blacklist.conf</span><br></pre><br>add <code>!xxxx</code> to this file.</p>
+<h2 id="build-the-kernel-from-scratch-works-as-well-but-…"><a href="#build-the-kernel-from-scratch-works-as-well-but-…" class="headerlink" title="* build the kernel from scratch works as well,but …."></a>* build the kernel from scratch works as well,but ….</h2>
   </div>
   <div>
   
@@ -262,7 +260,7 @@
 
 <div class="card card-content toc-card" id="mobiletoc">
   <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh"><span class="toc-text">Zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xfce4-terminal"><span class="toc-text">xfce4-terminal</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-kernel"><span class="toc-text">Change kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-module-from-kernel"><span class="toc-text">Remove module from kernel.</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh"><span class="toc-text">Zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xfce4-terminal"><span class="toc-text">xfce4-terminal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-kernel-arch-as-an-example"><span class="toc-text">Linux kernel(arch as an example)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-kernel"><span class="toc-text">Change kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-module-from-kernel"><span class="toc-text">Remove module from kernel.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#build-the-kernel-from-scratch-works-as-well-but-%E2%80%A6"><span class="toc-text">* build the kernel from scratch works as well,but ….</span></a>
 </div></main>
           <aside class="left-column">
             
@@ -278,11 +276,11 @@
     <span>Posts</span>
   </a>
   <a class="author-categories-count" href="/categories">
-    <span>0</span>
+    <span>1</span>
     <span>Categories</span>
   </a>
   <a class="author-tags-count" href="/tags">
-    <span>0</span>
+    <span>1</span>
     <span>Tags</span>
   </a>
 </div>
@@ -295,7 +293,7 @@
   <article class="display-when-two-columns spacer">
     <div class="card card-content toc-card">
       <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh"><span class="toc-text">Zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xfce4-terminal"><span class="toc-text">xfce4-terminal</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-kernel"><span class="toc-text">Change kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-module-from-kernel"><span class="toc-text">Remove module from kernel.</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh"><span class="toc-text">Zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xfce4-terminal"><span class="toc-text">xfce4-terminal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-kernel-arch-as-an-example"><span class="toc-text">Linux kernel(arch as an example)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-kernel"><span class="toc-text">Change kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-module-from-kernel"><span class="toc-text">Remove module from kernel.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#build-the-kernel-from-scratch-works-as-well-but-%E2%80%A6"><span class="toc-text">* build the kernel from scratch works as well,but ….</span></a>
     </div>
   </article>
   
@@ -305,6 +303,13 @@
   <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
   <div class="categories-list">
     
+      <a href="/categories/Geography">
+        <div class="categories-list-item">
+          Geography
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
   </div>
 </div>
   </article>
@@ -313,6 +318,8 @@
     <div class="tags-card">
   <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
   <div class="tags-list">
+    
+    <a href="\tags\Rocks" title="Rocks"><div class="tags-list-item">Rocks</div></a>
     
   </div>
 </div>
@@ -327,7 +334,7 @@
   
   <article class="card card-content toc-card">
     <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh"><span class="toc-text">Zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xfce4-terminal"><span class="toc-text">xfce4-terminal</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-kernel"><span class="toc-text">Change kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-module-from-kernel"><span class="toc-text">Remove module from kernel.</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh"><span class="toc-text">Zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xfce4-terminal"><span class="toc-text">xfce4-terminal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-kernel-arch-as-an-example"><span class="toc-text">Linux kernel(arch as an example)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-kernel"><span class="toc-text">Change kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-module-from-kernel"><span class="toc-text">Remove module from kernel.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#build-the-kernel-from-scratch-works-as-well-but-%E2%80%A6"><span class="toc-text">* build the kernel from scratch works as well,but ….</span></a>
   </article>
   
   
@@ -410,6 +417,23 @@
 </a>
 
   
+  
+  
+
+  
+  
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    
+<script src="//cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-svg.js"></script>
+
+  
+
   
   
   <script>
