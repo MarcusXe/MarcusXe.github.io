@@ -8,13 +8,13 @@
   <meta name="theme-color" content="#fff" id="theme-color">
   <meta name="description" content="Bi Hop">
   <link rel="icon" href="/img/icon.png">
-  <title>LinuxNotes</title>
+  <title>Bi Hop</title>
   
   
-  <meta property="og:title" content="LinuxNotes">
+  <meta property="og:title" content="Bi Hop">
   
   
-  <meta property="og:url" content="https://marcusxe.github.io/2021/01/18/LinuxNotes/index.html">
+  <meta property="og:url" content="https://marcusxe.github.io/2021/02/14/%E7%BA%A6%E6%9D%9F(Constants)/index.html">
   
   
   <meta property="og:img" content="/img/icon.png">
@@ -22,8 +22,8 @@
   
   
   <meta property="og:type" content="article">
-  <meta property="og:article:published_time" content="2021-01-18">
-  <meta property="og:article:modified_time" content="2021-01-21">
+  <meta property="og:article:published_time" content="2021-02-14">
+  <meta property="og:article:modified_time" content="2021-02-14">
   <meta property="og:article:author" content="Marcus Xe">
   
   
@@ -194,48 +194,73 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      LinuxNotes
+      
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2021-01-18T14:24:52.000Z">
+    <time datetime="2021-02-14T02:19:20.548Z">
       <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
-      <span>2021-01-18</span>
+      <span>2021-02-14</span>
     </time>
     
     
     <span class="dot"></span>
-    <span>109 words</span>
+    <span>265 words</span>
     
   </div>
   
   </header>
   <div id="section" class="post-content">
-    <h3 id="Zsh"><a href="#Zsh" class="headerlink" title="Zsh"></a>Zsh</h3><ul>
-<li>Chinese Characters shows  in the form of it’s code as <code>\245</code>  ,Zsh is to blame.</li>
-</ul>
-<p>Add </p>
-<pre class="highlight"><span class="line"><span class="built_in">export</span> LC_ALL=en_US.UTF-8  </span><br><span class="line"><span class="built_in">export</span> LANG=en_US.UTF-8 </span><br></pre>
-<p>to <code>.zshrc</code> works.</p>
-<h3 id="xfce4-terminal"><a href="#xfce4-terminal" class="headerlink" title="xfce4-terminal"></a>xfce4-terminal</h3><ul>
-<li>Random error code on special chars.as ? or other unrecognized form.</li>
-</ul>
-<p>Change it’s encoding to <code>Unicode-&gt;UTF 8</code>works.</p>
-<h3 id="Linux-kernel-arch-as-an-example"><a href="#Linux-kernel-arch-as-an-example" class="headerlink" title="Linux kernel(arch as an example)"></a>Linux kernel(arch as an example)</h3><h4 id="Change-kernel"><a href="#Change-kernel" class="headerlink" title="Change kernel"></a>Change kernel</h4><ol>
-<li>install first.</li>
-<li>make grub detect it.<pre class="highlight"><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></li>
-<li>Reboot to target kernel.</li>
-<li>Remove unnessaries.<br>Done</li>
+    <p>[TOC]</p>
+<h1 id="关系的完整性约束"><a href="#关系的完整性约束" class="headerlink" title="关系的完整性约束"></a>关系的完整性约束</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">实体完整性</td>
+<td style="text-align:center">约束主键的值</td>
+</tr>
+<tr>
+<td style="text-align:center">参照完整性</td>
+<td style="text-align:center">约束外键的值</td>
+</tr>
+<tr>
+<td style="text-align:center">域完整性(用户自定义完整性)</td>
+<td style="text-align:center">约束其他字段的值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="1-实体完整性（PRIMARY-KEY"><a href="#1-实体完整性（PRIMARY-KEY" class="headerlink" title="1. 实体完整性（PRIMARY KEY)"></a>1. 实体完整性（PRIMARY KEY)</h3><ul>
+<li><p><strong>规则：</strong>设属性A是基本关系R的主属性（码的组成部分）， 则属性A不能空值（NULL）和码不能出现重复值。</p>
+</li>
+<li><p><strong>说明：</strong> </p>
+<ol>
+<li>实体完整性是针对基本关系的</li>
+<li>实体完整性要求基本关系中的元组在组成码属性上不能有空值 </li>
+<li>现实世界中的实体是可区分的，即它们具有某种唯一性标识（不取重复值)  </li>
 </ol>
-<hr>
-<h4 id="Remove-module-from-kernel"><a href="#Remove-module-from-kernel" class="headerlink" title="Remove module from kernel."></a>Remove module from kernel.</h4><p>1.<br><pre class="highlight"><span class="line">mkdir /etc/modprobe.d/</span><br><span class="line">vim /etc/modprobe.d/blacklist.conf</span><br></pre><br>add <code>!xxxx</code> to this file.</p>
-<h2 id="build-the-kernel-from-scratch-works-as-well-but-…"><a href="#build-the-kernel-from-scratch-works-as-well-but-…" class="headerlink" title="* build the kernel from scratch works as well,but …."></a>* build the kernel from scratch works as well,but ….</h2>
+</li>
+</ul>
+<h3 id="2-参照（引用）完整性（FOREIGN-KEY）"><a href="#2-参照（引用）完整性（FOREIGN-KEY）" class="headerlink" title="2. 参照（引用）完整性（FOREIGN KEY）"></a>2. 参照（引用）完整性（FOREIGN KEY）</h3><ul>
+<li><strong>规则：</strong>基本关系R中含有与另一个基本关系S的主码相对应的属性组F （F称为R的外码），则对于R中的每个元组在F上的值必须为： <ol>
+<li>或者取空值（F的每个属性值均为空值） </li>
+<li>或者等于S中某个元组的主码值  </li>
+</ol>
+</li>
+</ul>
+
   </div>
   <div>
   
   <div class="post-note note-warning copyright" style="margin-top: 42px">
     <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://marcusxe.github.io/about">Marcus Xe</a></p>
-    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://marcusxe.github.io/2021/01/18/LinuxNotes/">https://marcusxe.github.io/2021/01/18/LinuxNotes/</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://marcusxe.github.io/2021/02/14/%E7%BA%A6%E6%9D%9F(Constants)/">https://marcusxe.github.io/2021/02/14/%E7%BA%A6%E6%9D%9F(Constants)/</a></p>
     <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
   </div>
   
@@ -244,23 +269,33 @@
 <div class="nav">
   
   <div class="nav-item-prev">
-    <a href="/2021/01/21/QAPF-Graph/" class="nav-link">
+    <a href="/2021/02/14/异常(Exception)/" class="nav-link">
       <i class="iconfont icon-left nav-prev-icon"></i>
       <div>
         <div class="nav-label">Prev</div>
-        
-        <div class="nav-title">QAPF Graph </div>
         
       </div>
     </a>
   </div>
   
   
+  <div class="nav-item-next">
+    <a href="/2021/02/08/Morse-Code/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+        <div class="nav-title">Morse Code </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
 </div>
 
 <div class="card card-content toc-card" id="mobiletoc">
   <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh"><span class="toc-text">Zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xfce4-terminal"><span class="toc-text">xfce4-terminal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-kernel-arch-as-an-example"><span class="toc-text">Linux kernel(arch as an example)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-kernel"><span class="toc-text">Change kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-module-from-kernel"><span class="toc-text">Remove module from kernel.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#build-the-kernel-from-scratch-works-as-well-but-%E2%80%A6"><span class="toc-text">* build the kernel from scratch works as well,but ….</span></a>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F"><span class="toc-text">关系的完整性约束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9E%E4%BD%93%E5%AE%8C%E6%95%B4%E6%80%A7%EF%BC%88PRIMARY-KEY"><span class="toc-text">1. 实体完整性（PRIMARY KEY)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%82%E7%85%A7%EF%BC%88%E5%BC%95%E7%94%A8%EF%BC%89%E5%AE%8C%E6%95%B4%E6%80%A7%EF%BC%88FOREIGN-KEY%EF%BC%89"><span class="toc-text">2. 参照（引用）完整性（FOREIGN KEY）</span></a></li></ol></li></ol></li></ol>
 </div></main>
           <aside class="left-column">
             
@@ -293,7 +328,7 @@
   <article class="display-when-two-columns spacer">
     <div class="card card-content toc-card">
       <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh"><span class="toc-text">Zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xfce4-terminal"><span class="toc-text">xfce4-terminal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-kernel-arch-as-an-example"><span class="toc-text">Linux kernel(arch as an example)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-kernel"><span class="toc-text">Change kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-module-from-kernel"><span class="toc-text">Remove module from kernel.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#build-the-kernel-from-scratch-works-as-well-but-%E2%80%A6"><span class="toc-text">* build the kernel from scratch works as well,but ….</span></a>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F"><span class="toc-text">关系的完整性约束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9E%E4%BD%93%E5%AE%8C%E6%95%B4%E6%80%A7%EF%BC%88PRIMARY-KEY"><span class="toc-text">1. 实体完整性（PRIMARY KEY)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%82%E7%85%A7%EF%BC%88%E5%BC%95%E7%94%A8%EF%BC%89%E5%AE%8C%E6%95%B4%E6%80%A7%EF%BC%88FOREIGN-KEY%EF%BC%89"><span class="toc-text">2. 参照（引用）完整性（FOREIGN KEY）</span></a></li></ol></li></ol></li></ol>
     </div>
   </article>
   
@@ -334,7 +369,7 @@
   
   <article class="card card-content toc-card">
     <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zsh"><span class="toc-text">Zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xfce4-terminal"><span class="toc-text">xfce4-terminal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-kernel-arch-as-an-example"><span class="toc-text">Linux kernel(arch as an example)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Change-kernel"><span class="toc-text">Change kernel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Remove-module-from-kernel"><span class="toc-text">Remove module from kernel.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#build-the-kernel-from-scratch-works-as-well-but-%E2%80%A6"><span class="toc-text">* build the kernel from scratch works as well,but ….</span></a>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F"><span class="toc-text">关系的完整性约束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9E%E4%BD%93%E5%AE%8C%E6%95%B4%E6%80%A7%EF%BC%88PRIMARY-KEY"><span class="toc-text">1. 实体完整性（PRIMARY KEY)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%82%E7%85%A7%EF%BC%88%E5%BC%95%E7%94%A8%EF%BC%89%E5%AE%8C%E6%95%B4%E6%80%A7%EF%BC%88FOREIGN-KEY%EF%BC%89"><span class="toc-text">2. 参照（引用）完整性（FOREIGN KEY）</span></a></li></ol></li></ol></li></ol>
   </article>
   
   
