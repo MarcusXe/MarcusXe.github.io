@@ -8,16 +8,26 @@
   <meta name="theme-color" content="#fff" id="theme-color">
   <meta name="description" content="Bi Hop">
   <link rel="icon" href="/img/icon.png">
-  <title>Tags</title>
+  <title>索引(Index)</title>
   
   
-  <meta property="og:title" content="Tags">
+  <meta property="og:title" content="索引(Index)">
   
   
-  <meta property="og:url" content="https://marcusxe.github.io/tags/Rocks/index.html">
+  <meta property="og:url" content="https://marcusxe.github.io/2021/01/21/%E7%B4%A2%E5%BC%95(Index)/index.html">
   
   
   <meta property="og:img" content="/img/icon.png">
+  
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2021-01-21">
+  <meta property="og:article:modified_time" content="2021-02-14">
+  <meta property="og:article:author" content="Marcus Xe">
+  
+  
+  <meta property="og:article:tag" content="Oracle">
   
   
   
@@ -108,6 +118,10 @@
 
   
   
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
   
   
 <!-- hexo injector head_end start -->
@@ -179,25 +193,101 @@
       <div class="container">
         <div class="columns">
           <main class="main-column">
-<div class="card card-content tag-page-card">
-  <div class="tags-page-title">Tags&nbsp-&nbspRocks</div>
-</div>
-<div class="archive-timeline">
-  
-  
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      索引(Index)
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2021-01-21T08:05:03.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2021-01-21</span>
+    </time>
     
-      <div class="archive-timeline-tag"><span>2021</span></div>
+    <span class="dot"></span>
+    
+    <a href="/categories/DataBase/" class="post-meta-link">DataBase</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>215 words</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
       
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2021-01-21</div>
-          <div class="archive-timeline-post-content"><a href="/2021/01/21/QAPF-Graph/" class="archive-timeline-post-item">QAPF Graph</a></div>
-        </div>
-      </div>
+      
+        <a href="/tags/Oracle/" class="post-meta-link">Oracle</a>
+      
     </div>
+  </div>
   
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="索引-Index"><a href="#索引-Index" class="headerlink" title="索引(Index)"></a>索引(Index)</h1><h3 id="1-创建索引方式"><a href="#1-创建索引方式" class="headerlink" title="1.创建索引方式"></a>1.创建索引方式</h3><ol>
+<li>隐式创建：DBMS一般会在创建PRIMARY KEY和UNIQUE约束 列上自动建立索引</li>
+<li>显式创建：使用CREATE INDEX语句创</li>
+</ol>
+<hr>
+<h3 id="2-显示创建索引的一般格式"><a href="#2-显示创建索引的一般格式" class="headerlink" title="2. 显示创建索引的一般格式"></a>2. 显示创建索引的一般格式</h3><pre class="highlight"><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">UNIQUE</span>] INDEX <span class="operator">&lt;</span>索引名<span class="operator">&gt;</span> <span class="keyword">ON</span> 表名(<span class="operator">&lt;</span>列名<span class="operator">&gt;</span> [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>]) </span><br></pre>
+<p> 索引可建立在一列或多列上，各列名之间用逗号分隔 </p>
+<p> ASC(升序)或DESC（降序），指定索引值的排列次序，缺省为ASC</p>
+<p> [UNIQUE]创建唯 一性索引(即如果这一属性值有重复值,无法插入)</p>
+<ul>
+<li>报错<code>ORA-01452: cannot CREATE UNIQUE INDEX; duplicate keys found</code></li>
+</ul>
+<p> 索引创建后，由DBMS负责使用和维护</p>
+<hr>
+<h3 id="3-删除索引"><a href="#3-删除索引" class="headerlink" title="3.删除索引"></a>3.删除索引</h3><p><code>DROP INDEX 索引名</code></p>
+<p>删除索引时，系统从数据字典中删去有关该索引的描述，同时 从数据区释放索引占用的存储空间</p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://marcusxe.github.io/about">Marcus Xe</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://marcusxe.github.io/2021/01/21/%E7%B4%A2%E5%BC%95(Index)/">https://marcusxe.github.io/2021/01/21/%E7%B4%A2%E5%BC%95(Index)/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2021/01/21/约束(Constants)/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+        <div class="nav-title">关系的完整性约束 </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2021/01/21/存储过程(SP)/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+        <div class="nav-title">存储过程(SP) </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95-Index"><span class="toc-text">索引(Index)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E6%96%B9%E5%BC%8F"><span class="toc-text">1.创建索引方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%98%BE%E7%A4%BA%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E7%9A%84%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F"><span class="toc-text">2. 显示创建索引的一般格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">3.删除索引</span></a></li></ol></li></ol></li></ol>
 </div></main>
           <aside class="left-column">
             
@@ -226,6 +316,13 @@
             
             <div class="sticky-tablet">
   
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95-Index"><span class="toc-text">索引(Index)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E6%96%B9%E5%BC%8F"><span class="toc-text">1.创建索引方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%98%BE%E7%A4%BA%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E7%9A%84%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F"><span class="toc-text">2. 显示创建索引的一般格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">3.删除索引</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </article>
   
   
   <article class="card card-content categories-widget">
@@ -274,82 +371,16 @@
   </article>
   
   
-  <article class="card card-content widescreen-archive archive-widget">
-    <div class="archive-card">
-  <div class="archive-card-header"><i class="iconfont icon-wodebaobiao" style="padding-right: 2px;"></i>Archive</div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a href="/archives/2021" class="archive-card-list-item">
-          2021
-          <span class="archive-card-list-item-badge">13</span>
-      </a>
-    
-  </div>
-</div>
-  </article>
-  
 </div>
           </aside>
           <aside class="right-column">
             <div class="sticky-widescreen">
   
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95-Index"><span class="toc-text">索引(Index)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E6%96%B9%E5%BC%8F"><span class="toc-text">1.创建索引方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%98%BE%E7%A4%BA%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E7%9A%84%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F"><span class="toc-text">2. 显示创建索引的一般格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">3.删除索引</span></a></li></ol></li></ol></li></ol>
+  </article>
   
   
   <article class="card card-content">
@@ -381,77 +412,6 @@
 </div>
   </article>
   
-  
-  <article class="card card-content">
-    <div class="archive-card">
-  <div class="archive-card-header"><i class="iconfont icon-wodebaobiao" style="padding-right: 2px;"></i>Archive</div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a href="/archives/2021" class="archive-card-list-item">
-          2021
-          <span class="archive-card-list-item-badge">13</span>
-      </a>
-    
-  </div>
-</div>
-  </article>
   
 </div>
           </aside>
@@ -516,6 +476,43 @@
   
 
   
+  
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    
+<script src="//cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-svg.js"></script>
+
+  
+
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
   
   
   

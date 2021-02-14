@@ -8,13 +8,13 @@
   <meta name="theme-color" content="#fff" id="theme-color">
   <meta name="description" content="Bi Hop">
   <link rel="icon" href="/img/icon.png">
-  <title>Bi Hop</title>
+  <title>Exception</title>
   
   
-  <meta property="og:title" content="Bi Hop">
+  <meta property="og:title" content="Exception">
   
   
-  <meta property="og:url" content="https://marcusxe.github.io/2021/02/14/%E7%B4%A2%E5%BC%95(Index)/index.html">
+  <meta property="og:url" content="https://marcusxe.github.io/2021/01/21/%E5%BC%82%E5%B8%B8(Exception)/index.html">
   
   
   <meta property="og:img" content="/img/icon.png">
@@ -22,10 +22,12 @@
   
   
   <meta property="og:type" content="article">
-  <meta property="og:article:published_time" content="2021-02-14">
+  <meta property="og:article:published_time" content="2021-01-21">
   <meta property="og:article:modified_time" content="2021-02-14">
   <meta property="og:article:author" content="Marcus Xe">
   
+  
+  <meta property="og:article:tag" content="Oracle">
   
   
   
@@ -194,46 +196,47 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      
+      Exception
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2021-02-14T02:19:39.545Z">
+    <time datetime="2021-01-21T08:05:03.000Z">
       <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
-      <span>2021-02-14</span>
+      <span>2021-01-21</span>
     </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/DataBase/" class="post-meta-link">DataBase</a>
+    
     
     
     <span class="dot"></span>
-    <span>215 words</span>
+    <span>30 words</span>
     
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/Oracle/" class="post-meta-link">Oracle</a>
+      
+    </div>
   </div>
   
   </header>
   <div id="section" class="post-content">
-    <h1 id="索引-Index"><a href="#索引-Index" class="headerlink" title="索引(Index)"></a>索引(Index)</h1><h3 id="1-创建索引方式"><a href="#1-创建索引方式" class="headerlink" title="1.创建索引方式"></a>1.创建索引方式</h3><ol>
-<li>隐式创建：DBMS一般会在创建PRIMARY KEY和UNIQUE约束 列上自动建立索引</li>
-<li>显式创建：使用CREATE INDEX语句创</li>
-</ol>
+    <h1 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h1><h3 id="1-SYSTEM-EXCEPTION"><a href="#1-SYSTEM-EXCEPTION" class="headerlink" title="1. SYSTEM EXCEPTION"></a>1. SYSTEM EXCEPTION</h3><pre class="highlight"><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">STU STUDENT<span class="operator">%</span>ROWTYPE;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">INTO</span> STU</span><br><span class="line"><span class="keyword">FROM</span> STUDENT <span class="keyword">WHERE</span> SNO<span class="operator">=</span><span class="string">&#x27;201901&#x27;</span>;</span><br><span class="line">DBMS_OUTPUT.PUT_LINE(STU.SNAME<span class="operator">||</span><span class="string">&#x27;,&#x27;</span><span class="operator">||</span>STU.SNO);</span><br><span class="line">EXCEPTION</span><br><span class="line"><span class="keyword">WHEN</span> NO_DATA_FOUND <span class="keyword">THEN</span></span><br><span class="line">DBMS_OUTPUT.PUT_LINE(<span class="string">&#x27;FUCK!&#x27;</span>);</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre>
 <hr>
-<h3 id="2-显示创建索引的一般格式"><a href="#2-显示创建索引的一般格式" class="headerlink" title="2. 显示创建索引的一般格式"></a>2. 显示创建索引的一般格式</h3><pre class="highlight"><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">UNIQUE</span>] INDEX <span class="operator">&lt;</span>索引名<span class="operator">&gt;</span> <span class="keyword">ON</span> 表名(<span class="operator">&lt;</span>列名<span class="operator">&gt;</span> [<span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>]) </span><br></pre>
-<p> 索引可建立在一列或多列上，各列名之间用逗号分隔 </p>
-<p> ASC(升序)或DESC（降序），指定索引值的排列次序，缺省为ASC</p>
-<p> [UNIQUE]创建唯 一性索引(即如果这一属性值有重复值,无法插入)</p>
-<ul>
-<li>报错<code>ORA-01452: cannot CREATE UNIQUE INDEX; duplicate keys found</code></li>
-</ul>
-<p> 索引创建后，由DBMS负责使用和维护</p>
-<hr>
-<h3 id="3-删除索引"><a href="#3-删除索引" class="headerlink" title="3.删除索引"></a>3.删除索引</h3><p><code>DROP INDEX 索引名</code></p>
-<p>删除索引时，系统从数据字典中删去有关该索引的描述，同时 从数据区释放索引占用的存储空间</p>
 
   </div>
   <div>
   
   <div class="post-note note-warning copyright" style="margin-top: 42px">
     <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://marcusxe.github.io/about">Marcus Xe</a></p>
-    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://marcusxe.github.io/2021/02/14/%E7%B4%A2%E5%BC%95(Index)/">https://marcusxe.github.io/2021/02/14/%E7%B4%A2%E5%BC%95(Index)/</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://marcusxe.github.io/2021/01/21/%E5%BC%82%E5%B8%B8(Exception)/">https://marcusxe.github.io/2021/01/21/%E5%BC%82%E5%B8%B8(Exception)/</a></p>
     <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
   </div>
   
@@ -241,11 +244,25 @@
 </article>
 <div class="nav">
   
+  <div class="nav-item-prev">
+    <a href="/2021/01/21/同义词(Synonym)/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+        <div class="nav-title">同义词(Synonym) </div>
+        
+      </div>
+    </a>
+  </div>
+  
   
   <div class="nav-item-next">
-    <a href="/2021/02/14/同义词(Synonym)/" class="nav-link">
+    <a href="/2021/01/21/约束(Constants)/" class="nav-link">
       <div>
         <div class="nav-label">Next</div>
+        
+        <div class="nav-title">关系的完整性约束 </div>
         
       </div>
       <i class="iconfont icon-right nav-next-icon"></i>
@@ -256,7 +273,7 @@
 
 <div class="card card-content toc-card" id="mobiletoc">
   <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95-Index"><span class="toc-text">索引(Index)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E6%96%B9%E5%BC%8F"><span class="toc-text">1.创建索引方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%98%BE%E7%A4%BA%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E7%9A%84%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F"><span class="toc-text">2. 显示创建索引的一般格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">3.删除索引</span></a></li></ol></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Exception"><span class="toc-text">Exception</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-SYSTEM-EXCEPTION"><span class="toc-text">1. SYSTEM EXCEPTION</span></a></li></ol></li></ol></li></ol>
 </div></main>
           <aside class="left-column">
             
@@ -268,15 +285,15 @@
 <p class="author-description"></p>
 <div class="author-message">
   <a class="author-posts-count" href="/archives">
-    <span>9</span>
+    <span>13</span>
     <span>Posts</span>
   </a>
   <a class="author-categories-count" href="/categories">
-    <span>1</span>
+    <span>3</span>
     <span>Categories</span>
   </a>
   <a class="author-tags-count" href="/tags">
-    <span>1</span>
+    <span>3</span>
     <span>Tags</span>
   </a>
 </div>
@@ -289,7 +306,7 @@
   <article class="display-when-two-columns spacer">
     <div class="card card-content toc-card">
       <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95-Index"><span class="toc-text">索引(Index)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E6%96%B9%E5%BC%8F"><span class="toc-text">1.创建索引方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%98%BE%E7%A4%BA%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E7%9A%84%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F"><span class="toc-text">2. 显示创建索引的一般格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">3.删除索引</span></a></li></ol></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Exception"><span class="toc-text">Exception</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-SYSTEM-EXCEPTION"><span class="toc-text">1. SYSTEM EXCEPTION</span></a></li></ol></li></ol></li></ol>
     </div>
   </article>
   
@@ -306,6 +323,20 @@
         </div>
       </a>
     
+      <a href="/categories/DataBase">
+        <div class="categories-list-item">
+          DataBase
+          <span class="categories-list-item-badge">8</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HardWare">
+        <div class="categories-list-item">
+          HardWare
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
   </div>
 </div>
   </article>
@@ -314,6 +345,10 @@
     <div class="tags-card">
   <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
   <div class="tags-list">
+    
+    <a href="\tags\Oracle" title="Oracle"><div class="tags-list-item">Oracle</div></a>
+    
+    <a href="\tags\Archtacture" title="Archtacture"><div class="tags-list-item">Archtacture</div></a>
     
     <a href="\tags\Rocks" title="Rocks"><div class="tags-list-item">Rocks</div></a>
     
@@ -330,7 +365,7 @@
   
   <article class="card card-content toc-card">
     <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95-Index"><span class="toc-text">索引(Index)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E6%96%B9%E5%BC%8F"><span class="toc-text">1.创建索引方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%98%BE%E7%A4%BA%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E7%9A%84%E4%B8%80%E8%88%AC%E6%A0%BC%E5%BC%8F"><span class="toc-text">2. 显示创建索引的一般格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">3.删除索引</span></a></li></ol></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Exception"><span class="toc-text">Exception</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-SYSTEM-EXCEPTION"><span class="toc-text">1. SYSTEM EXCEPTION</span></a></li></ol></li></ol></li></ol>
   </article>
   
   
@@ -340,23 +375,23 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-02-14</div>
-        <a href="/2021/02/14/索引(Index)/"><div class="recent-posts-item-content"></div></a>
+        <div class="recent-posts-item-title">2021-02-08</div>
+        <a href="/2021/02/08/Morse-Code/"><div class="recent-posts-item-content">Morse Code</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-02-14</div>
-        <a href="/2021/02/14/同义词(Synonym)/"><div class="recent-posts-item-content"></div></a>
+        <div class="recent-posts-item-title">2021-01-26</div>
+        <a href="/2021/01/26/kvm-on-Arch/"><div class="recent-posts-item-content">kvm on Arch</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-02-14</div>
-        <a href="/2021/02/14/序列(Sequence)/"><div class="recent-posts-item-content"></div></a>
+        <div class="recent-posts-item-title">2021-01-21</div>
+        <a href="/2021/01/21/QAPF-Graph/"><div class="recent-posts-item-content">QAPF Graph</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-02-14</div>
-        <a href="/2021/02/14/异常(Exception)/"><div class="recent-posts-item-content"></div></a>
+        <div class="recent-posts-item-title">2021-01-21</div>
+        <a href="/2021/01/21/同义词(Synonym)/"><div class="recent-posts-item-content">同义词(Synonym)</div></a>
       </div>
     
   </div>
