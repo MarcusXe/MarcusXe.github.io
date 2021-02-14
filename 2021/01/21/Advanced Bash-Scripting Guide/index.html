@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html  lang="en,zh-cn" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="Bi Hop">
+  <link rel="icon" href="/img/icon.png">
+  <title>索引(Index)</title>
+  
+  
+  <meta property="og:title" content="索引(Index)">
+  
+  
+  <meta property="og:url" content="http://www.xeby.me/2021/01/21/Advanced%20Bash-Scripting%20Guide/index.html">
+  
+  
+  <meta property="og:img" content="/img/icon.png">
+  
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2021-01-21">
+  <meta property="og:article:modified_time" content="2021-02-14">
+  <meta property="og:article:author" content="Marcus Xe">
+  
+  
+  <meta property="og:article:tag" content="Oracle">
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  <link rel="prefetch" href="//cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-svg.js" as="script">
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+  
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/icon.png" alt="logo">
+      
+      <span class="navbar-logo-dsc">Bi Hop</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    Home
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    Archive
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    Tags
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    Categories
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    About
+    
+    </a>
+    
+    <a href="/links" class="navbar-menu-item">
+    
+    Friends
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      索引(Index)
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2021-01-21T08:05:04.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2021-01-21</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/DataBase/" class="post-meta-link">DataBase</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>4.9k words</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/Oracle/" class="post-meta-link">Oracle</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="Advanced-Bash-Scripting-Guide"><a href="#Advanced-Bash-Scripting-Guide" class="headerlink" title="Advanced Bash-Scripting Guide"></a>Advanced Bash-Scripting Guide</h1><h2 id="An-in-depth-exploration-of-the-art-of-shell-scripting"><a href="#An-in-depth-exploration-of-the-art-of-shell-scripting" class="headerlink" title="An in-depth exploration of the art of shell scripting"></a>An in-depth exploration of the art of shell scripting</h2><h3 id="Mendel-Cooper"><a href="#Mendel-Cooper" class="headerlink" title="Mendel Cooper"></a>Mendel Cooper</h3><p>This tutorial assumes no previous knowledge of scripting or programming, yet progresses rapidly toward an intermediate/advanced level of instruction . . . all the while sneaking in little nuggets of UNIX® wisdom and lore. It serves as a textbook, a manual for self-study, and as a reference and source of knowledge on shell scripting techniques. The exercises and heavily-commented examples invite active reader participation, under the premise that <code>the only way to really learn scripting is to write scripts</code> .<br>This book is suitable for classroom use as a general introduction to programming concepts.<br>This document is herewith granted to the Public Domain. <code>No copyright!</code></p>
+<h2 id="Dedication"><a href="#Dedication" class="headerlink" title="Dedication"></a>Dedication</h2><p>For Anita, the source of all the magic.</p>
+<h1 id="Part-1-Introduction"><a href="#Part-1-Introduction" class="headerlink" title="Part 1. Introduction"></a>Part 1. Introduction</h1><pre class="highlight"><span class="line">Script: A writing; a written document. [Obs.]</span><br><span class="line">--Webster&#39;s Dictionary, 1913 ed.</span><br></pre>
+<p>The shell is a command interpreter. More than just the insulating layer between the operating system kernel and the user, it’s also a fairly powerful programming language. A shell program, called a <em>script</em>, is an easy-to-use tool for building applications by “gluing together” system calls, tools, utilities, and compiled binaries. Virtually the entire repertoire of UNIX commands, utilities, and tools is available for invocation by a shell script. If that were not enough, internal shell commands, such as testing and loop constructs, lend additional power and flexibility to scripts. Shell scripts are especially well suited for administrative system tasks and other routine repetitive tasks not requiring the bells and whistles of a full-blown tightly structured programming language.</p>
+<h2 id="Chapter-1-Shell-Programming"><a href="#Chapter-1-Shell-Programming" class="headerlink" title="Chapter 1. Shell Programming!"></a>Chapter 1. Shell Programming!</h2><pre><code>No programming language is perfect. There is not even a single best language; there are only languages well suited or perhaps poorly suited for particular purposes.     
+--Herbert Mayer
+</code></pre><p>A working knowledge of shell scripting is essential to anyone wishing to become reasonably proficient at system administration, even if they do not anticipate ever having to actually write a script. Consider that as a Linux machine boots up, it executes the shell scripts in <code>/etc/rc.d</code> to restore the system configuration and set up services. A detailed understanding of these startup scripts is important for analyzing the behavior of a system, and possibly modifying it.</p>
+<p>The craft of scripting is not hard to master, since scripts can be built in bite-sized sections and there is only a fairly small set of shell-specific operators and options <a href="#FTN.AEN62">[1]</a> to learn. The syntax is simple — even austere — similar to that of invoking and chaining together utilities at the command line, and there are only a few “rules” governing their use. Most short scripts work right the first time, and debugging even the longer ones is straightforward.</p>
+<blockquote>
+<p>  In the early days of personal computing, the BASIC language enabled<br>  anyone reasonably computer proficient to write programs on an early<br>  generation of microcomputers. Decades later, the Bash scripting<br>  language enables anyone with a rudimentary knowledge of Linux or<br>  UNIX to do the same on modern machines.</p>
+<p>  We now have miniaturized single-board computers with amazing<br>  capabilities, such as the <a target="_blank" rel="noopener" href="http://www.raspberrypi.org/">Raspberry Pi</a>.<br>  Bash scripting provides a way to explore the capabilities of these<br>  fascinating devices.</p>
+</blockquote>
+<p>A shell script is a quick-and-dirty method of prototyping a complex application. Getting even a limited subset of the functionality to work in a script is often a useful first stage in project development. In this way, the structure of the application can be tested and tinkered with, and the major pitfalls found before proceeding to the final coding in <em>C</em>, <em>C++</em>, <em>Java</em>, [Perl] or <em>Python</em>.</p>
+<p>Shell scripting hearkens back to the classic UNIX philosophy of breaking complex projects into simpler subtasks, of chaining together components and utilities. Many consider this a better, or at least more esthetically pleasing approach to problem solving than using one of the new generation of high-powered all-in-one languages, such as <em>Perl</em>, which attempt to be all things to all people, but at the cost of forcing you to alter your thinking processes to fit the tool.</p>
+<p>According to [Herbert Mayer], “a useful language needs arrays, pointers, and a generic mechanism for building data structures.” By these criteria, shell scripting falls somewhat short of being “useful.” Or, perhaps not. . . .</p>
+<hr>
+<p>When not to use shell scripts</p>
+<ul>
+<li>Resource-intensive tasks, especially where speed is a factor (sorting, hashing, recursion <a href="#FTN.AEN87">[2]</a> …)</li>
+<li>Procedures involving heavy-duty math operations, especially floating point arithmetic, arbitrary precision calculations, or complex numbers (use <em>C++</em> or <em>FORTRAN</em> instead)Cross-platform portability required (use <em>C</em> or <em>Java</em> instead)</li>
+<li>Complex applications, where structured programming is a necessity (type-checking of variables, function prototypes, etc.)</li>
+<li>Mission-critical applications upon which you are betting the future of the company</li>
+<li>Situations where <em>security</em> is important, where you need to guarantee the integrity of your system and protect against intrusion, cracking, and vandalism</li>
+<li>Project consists of subcomponents with interlocking dependenciesExtensive file operations required (<em>Bash</em> is limited to serial file access, and that only in a particularly clumsy and inefficient line-by-line fashion.)</li>
+<li>Need native support for multi-dimensional arrays</li>
+<li>Need data structures, such as linked lists or trees</li>
+<li>Need to generate / manipulate graphics or GUIs</li>
+<li>Need direct access to system hardware or external peripherals</li>
+<li>Need port or <a href="devref1.html#SOCKETREF">socket</a> I/O</li>
+<li>Need to use libraries or interface with legacy code</li>
+<li>Proprietary, closed-source applications (Shell scripts put the source code right out in the open for all the world to see.)</li>
+</ul>
+<p>If any of the above applies, consider a more powerful scripting language — perhaps <em>Perl</em>, <em>Tcl</em>, <em>Python</em>, <em>Ruby</em> — or possibly a compiled language such as <em>C</em>, <em>C++</em>, or <em>Java</em>. Even then, prototyping the application as a shell script might still be a useful development step.</p>
+<hr>
+<p>We will be using Bash, an acronym <a href="#FTN.AEN139">[3]</a> for “Bourne-Again shell” and a pun on Stephen Bourne’s now classic <em>Bourne</em> shell. Bash has become a <em>de facto</em> standard for shell scripting on most flavors of UNIX. Most of the principles this book covers apply equally well to scripting with other shells, such as the <em>Korn Shell</em>, from which Bash derives some of its features, <a href="#FTN.AEN147">[4]</a> and the <em>C Shell</em> and its variants. (Note that <em>C Shell</em> programming is not recommended due to certain inherent problems, as pointed out in an October, 1993 <a target="_blank" rel="noopener" href="http://www.faqs.org/faqs/unix-faq/shell/csh-whynot/">Usenet post</a> by Tom Christiansen.)</p>
+<p>What follows is a tutorial on shell scripting. It relies heavily on examples to illustrate various features of the shell. The example scripts work — they’ve been tested, insofar as possible — and some of them are even useful in real life. The reader can play with the actual working code of the examples in the source archive (<code>scriptname.sh</code> or <code>scriptname.bash</code>), <a href="#FTN.AEN157">[5]</a> give them <em>execute</em> permission (<code>**chmod u+rx scriptname**</code>), then run them to see what happens. Should the <a target="_blank" rel="noopener" href="http://bash.deta.in/abs-guide-latest.tar.bz2">source archive</a> not be available, then cut-and-paste from the <a target="_blank" rel="noopener" href="http://www.tldp.org/LDP/abs/abs-guide.html.tar.gz">HTML</a> or <a target="_blank" rel="noopener" href="http://bash.deta.in/abs-guide.pdf">pdf</a> rendered versions. Be aware that some of the scripts presented here introduce features before they are explained, and this may require the reader to temporarily skip ahead for enlightenment.</p>
+<pre class="highlight"><span class="line">Unless otherwise noted, [the author](mailto:thegrendel.abs@gmail.com) of this book wrote the example scripts that follow.</span><br><span class="line">His countenance was bold and bashed not.**--Edmund Spenser</span><br></pre>
+<p>Notes</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><a href="why-shell.html#AEN62">[1]</a></th>
+<th>These are referred to as <a href="internal.html#BUILTINREF">builtins</a>, features internal to the shell.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="why-shell.html#AEN87">[2]</a></td>
+<td>Although <a href="localvar.html#RECURSIONREF0">recursion <em>is</em> possible in a shell script</a>, it tends to be slow and its implementation is often an <a href="recurnolocvar.html#FIBOREF">ugly kludge</a>.</td>
+</tr>
+<tr>
+<td><a href="why-shell.html#AEN139">[3]</a></td>
+<td>An <em>acronym</em> is an <em>ersatz</em> word formed by pasting together the initial letters of the words into a tongue-tripping phrase. This morally corrupt and pernicious practice deserves appropriately severe punishment. Public flogging suggests itself.</td>
+</tr>
+<tr>
+<td><a href="why-shell.html#AEN147">[4]</a></td>
+<td>Many of the features of <em>ksh88</em>, and even a few from the updated <em>ksh93</em> have been merged into Bash.</td>
+</tr>
+<tr>
+<td><a href="why-shell.html#AEN157">[5]</a></td>
+<td>By convention, user-written shell scripts that are Bourne shell compliant generally take a name with a <code>.sh</code> extension. System scripts, such as those found in <code>/etc/rc.d</code>, do not necessarily conform to this nomenclature.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Chapter-2-Starting-Off-With-a-Sha-Bang"><a href="#Chapter-2-Starting-Off-With-a-Sha-Bang" class="headerlink" title="Chapter 2. Starting Off With a Sha-Bang"></a>Chapter 2. Starting Off With a Sha-Bang</h2><pre class="highlight"><span class="line">Shell programming is a 1950s juke box . . .</span><br><span class="line">--Larry Wall</span><br></pre>
+<p>In the simplest case, a script is nothing more than a list of system commands stored in a file. At the very least, this saves the effort of retyping that particular sequence of commands each time it is invoked.</p>
+<p><strong>Example 2-1. *cleanup*: A script to clean up log files in /var/log</strong></p>
+<pre class="highlight"><span class="line"><span class="meta">#</span><span class="bash"> Cleanup</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> Run as root, of course.</span> </span><br><span class="line">cd /var/log </span><br><span class="line">cat /dev/null &gt; messages </span><br><span class="line">cat /dev/null &gt; wtmp </span><br><span class="line">echo &quot;Log files cleaned up.&quot;</span><br></pre>
+<p>There is nothing unusual here, only a set of commands that could just as easily have been invoked one by one from the command-line on the console or in a terminal window. The advantages of placing the commands in a script go far beyond not having to retype them time and again. The script becomes a <em>program</em> — a <em>tool</em> — and it can easily be modified or customized for a particular application.</p>
+<p><strong>Example 2-2. *cleanup*: An improved clean-up script</strong></p>
+<pre class="highlight"><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> Proper header <span class="keyword">for</span> a Bash script.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Cleanup, version 2 <span class="comment"># Run as root, of course.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Insert code here to <span class="built_in">print</span> error message and <span class="built_in">exit</span> <span class="keyword">if</span> not root.</span></span><br><span class="line">LOG_DIR=/var/log </span><br><span class="line"><span class="meta">#</span><span class="bash"> Variables are better than hard-coded values.</span> </span><br><span class="line">cd $LOG_DIR cat /dev/null &gt; messages </span><br><span class="line">cat /dev/null &gt; wtmp  </span><br><span class="line">echo &quot;Logs cleaned up.&quot; </span><br><span class="line">exit </span><br><span class="line"><span class="meta">#</span><span class="bash">  The right and proper method of <span class="string">&quot;exiting&quot;</span> from a script.</span>     </span><br><span class="line"><span class="meta">#</span><span class="bash">  A bare <span class="string">&quot;exit&quot;</span> (no parameter) returns the <span class="built_in">exit</span> status</span>     </span><br><span class="line"><span class="meta">#</span><span class="bash">  of the preceding <span class="built_in">command</span>.</span> </span><br></pre>
+<p>Now <em>that’s</em> beginning to look like a real script. But we can go even farther . . .</p>
+<p><strong>Example 2-3. *cleanup*: An enhanced and generalized version of above scripts.</strong></p>
+<pre class="highlight"><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Cleanup, version 3</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">  Warning:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  -------</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  This script uses quite a number of features that will be explained</span></span><br><span class="line"><span class="meta">#</span><span class="bash">+ later on.</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  By the time you<span class="string">&#x27;ve finished the first half of the book,</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">+ there should be nothing mysterious about it.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">LOG_DIR=/var/log</span><br><span class="line">ROOT_UID=0     # Only users with $UID 0 have root privileges.</span><br><span class="line">LINES=50       # Default number of lines saved.</span><br><span class="line">E_XCD=86       # Can&#x27;t change directory?</span><br><span class="line">E_NOTROOT=87   # Non-root exit error.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Run as root, of course.</span></span><br><span class="line">if [ &quot;$UID&quot; -ne &quot;$ROOT_UID&quot; ]</span><br><span class="line">then</span><br><span class="line">  echo &quot;Must be root to run this script.&quot;</span><br><span class="line">  exit $E_NOTROOT</span><br><span class="line">fi  </span><br><span class="line"></span><br><span class="line">if [ -n &quot;$1&quot; ]</span><br><span class="line"><span class="meta">#</span><span class="bash"> Test whether command-line argument is present (non-empty).</span></span><br><span class="line">then</span><br><span class="line">  lines=$1</span><br><span class="line">else  </span><br><span class="line">  lines=$LINES # Default, if not specified on command-line.</span><br><span class="line">fi  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">  Stephane Chazelas suggests the following,</span></span><br><span class="line"><span class="meta">#</span><span class="bash">+ as a better way of checking command-line arguments,</span></span><br><span class="line"><span class="meta">#</span><span class="bash">+ but this is still a bit advanced <span class="keyword">for</span> this stage of the tutorial.</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#    E_WRONGARGS=85  # Non-numerical argument (bad argument format).</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#    case &quot;$1&quot; in</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">    <span class="string">&quot;&quot;</span>      ) lines=50;;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    *[!0-9]*) <span class="built_in">echo</span> <span class="string">&quot;Usage: `basename <span class="variable">$0</span>` lines-to-cleanup&quot;</span>;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">exit</span> <span class="variable">$E_WRONGARGS</span>;;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    *       ) lines=<span class="variable">$1</span>;;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    <span class="keyword">esac</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment">#* Skip ahead to &quot;Loops&quot; chapter to decipher all this.</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cd $LOG_DIR</span><br><span class="line"></span><br><span class="line">if [ `pwd` != &quot;$LOG_DIR&quot; ]  # or   if [ &quot;$PWD&quot; != &quot;$LOG_DIR&quot; ]</span><br><span class="line">                            # Not in /var/log?</span><br><span class="line">then</span><br><span class="line">  echo &quot;Can&#x27;t change to $LOG_DIR.&quot;</span><br><span class="line">  exit $E_XCD</span><br><span class="line">fi  # Doublecheck if in right directory before messing with log file.</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Far more efficient is:</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment"># cd /var/log || &#123;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="built_in">echo</span> <span class="string">&quot;Cannot change to necessary directory.&quot;</span> &gt;&amp;2</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="built_in">exit</span> <span class="variable">$E_XCD</span>;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tail -n $lines messages &gt; mesg.temp # Save last section of message log file.</span><br><span class="line">mv mesg.temp messages               # Rename it as system log file.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">  cat /dev/null &gt; messages</span></span><br><span class="line"><span class="meta">#</span><span class="bash">* No longer needed, as the above method is safer.</span></span><br><span class="line"></span><br><span class="line">cat /dev/null &gt; wtmp  #  &#x27;: &gt; wtmp&#x27; and &#x27;&gt; wtmp&#x27;  have the same effect.</span><br><span class="line">echo &quot;Log files cleaned up.&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash">  Note that there are other <span class="built_in">log</span> files <span class="keyword">in</span> /var/<span class="built_in">log</span> not affected</span></span><br><span class="line"><span class="meta">#</span><span class="bash">+ by this script.</span></span><br><span class="line"></span><br><span class="line">exit 0</span><br><span class="line"><span class="meta">#</span><span class="bash">  A zero <span class="built_in">return</span> value from the script upon <span class="built_in">exit</span> indicates success</span></span><br><span class="line"><span class="meta">#</span><span class="bash">+ to the shell.</span></span><br></pre>
+<p>Since you may not wish to wipe out the entire system log, this version of the script keeps the last section of the message log intact. You will constantly discover ways of fine-tuning previously written scripts for increased effectiveness.</p>
+<p>* <em> </em></p>
+<p>The <em>sha-bang</em> ( #!) <a href="#FTN.AEN205">[1]</a> at the head of a script tells your system that this file is a set of commands to be fed to the command interpreter indicated. The #! is actually a two-byte <a href="#FTN.AEN214">[2]</a> <em>magic number</em>, a special marker that designates a file type, or in this case an executable shell script (type <code>**man magic**</code> for more details on this fascinating topic). Immediately following the <em>sha-bang</em> is a <em>path name</em>. This is the path to the program that interprets the commands in the script, whether it be a shell, a programming language, or a utility. This command interpreter then executes the commands in the script, starting at the top (the line following the <em>sha-bang</em> line), and ignoring comments. <a href="#FTN.AEN226">[3]</a></p>
+<pre class="highlight"><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/perl</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/tcl</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/sed -f</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/awk -f</span></span><br></pre>
+<p>Each of the above script header lines calls a different command interpreter, be it <code>/bin/sh</code>, the default shell (<strong>bash</strong> in a Linux system) or otherwise. <a href="#FTN.AEN242">[4]</a> Using <code>**#!/bin/sh**</code>, the default Bourne shell in most commercial variants of UNIX, makes the script <a href="portabilityissues.html">portable</a> to non-Linux machines, though you <a href="gotchas.html#BINSH">sacrifice Bash-specific features</a>. The script will, however, conform to the POSIX <a href="#FTN.AEN256">[5]</a> <strong>sh</strong> standard.</p>
+<p>Note that the path given at the “sha-bang” must be correct, otherwise an error message — usually “Command not found.” — will be the only result of running the script. <a href="#FTN.AEN269">[6]</a></p>
+<p>#! can be omitted if the script consists only of a set of generic system commands, using no internal shell directives. The second example, above, requires the initial #!, since the variable assignment line, <code>**lines=50**</code>, uses a shell-specific construct. <a href="#FTN.AEN279">[7]</a> Note again that <code>**#!/bin/sh**</code> invokes the default shell interpreter, which defaults to <code>/bin/bash</code> on a Linux machine.</p>
+<blockquote>
+<p>This tutorial encourages a modular approach to constructing a script. Make note of and collect “boilerplate” code snippets that might be useful in future scripts. Eventually you will build quite an extensive library of nifty routines. As an example, the following script prolog tests whether the script has been invoked with the correct number of parameters.</p>
+</blockquote>
+<pre class="highlight"><span class="line">E_WRONG_ARGS=85</span><br><span class="line">script_parameters=&quot;-a -h -m -z&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash">                  -a = all, -h = <span class="built_in">help</span>, etc.</span></span><br><span class="line"></span><br><span class="line">if [ $# -ne $Number_of_expected_args ]</span><br><span class="line">then</span><br><span class="line">  echo &quot;Usage: `basename $0` $script_parameters&quot;</span><br><span class="line"><span class="meta">  #</span><span class="bash"> `basename <span class="variable">$0</span>` is the script<span class="string">&#x27;s filename.</span></span></span><br><span class="line">  exit $E_WRONG_ARGS</span><br><span class="line">fi</span><br></pre>
+<blockquote>
+<p> Many times, you will write a script that carries out one particular task. The first script in this chapter is an example. Later, it might occur to you to generalize the script to do other, similar tasks. Replacing the literal (“hard-wired”) constants by variables is a step in that direction, as is replacing repetitive code blocks by <a href="functions.html#FUNCTIONREF">functions</a>.</p>
+</blockquote>
+<p>Notes</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><a href="sha-bang.html#AEN205">[1]</a></th>
+<th>More commonly seen in the literature as <em>she-bang</em> or <em>sh-bang</em>. This derives from the concatenation of the tokens <em>sharp</em> (#) and <em>bang</em> (!).</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="sha-bang.html#AEN214">[2]</a></td>
+<td>Some flavors of UNIX (those based on 4.2 BSD) allegedly take a four-byte magic number, requiring a blank after the ! — <code>**#! /bin/sh**</code>. <a target="_blank" rel="noopener" href="http://www.in-ulm.de/~mascheck/various/shebang/#details">According to Sven Mascheck</a> this is probably a myth.</td>
+</tr>
+<tr>
+<td><a href="sha-bang.html#AEN226">[3]</a></td>
+<td>The #! line in a shell script will be the first thing the command interpreter (<strong>sh</strong> or <strong>bash</strong>) sees. Since this line begins with a #, it will be correctly interpreted as a comment when the command interpreter finally executes the script. The line has already served its purpose - calling the command interpreter.If, in fact, the script includes an <em>extra</em> #! line, then <strong>bash</strong> will interpret it as a comment.<code>#!/bin/bash echo &quot;Part 1 of script.&quot; a=1 #!/bin/bash # This does *not* launch a new script. echo &quot;Part 2 of script.&quot; echo $a  # Value of $a stays at 1.</code></td>
+</tr>
+<tr>
+<td><a href="sha-bang.html#AEN242">[4]</a></td>
+<td>This allows some cute tricks. <code>`` #!/bin/rm # Self-deleting script. # Nothing much seems to happen when you run this... except that the file disappears. WHATEVER=85 echo &quot;This line will never print (betcha!).&quot; exit $WHATEVER  # Doesn&#39;t matter. The script will not exit here.                # Try an echo $? after script termination.                # You&#39;ll get a 0, not a 85.</code>Also, try starting a <code>README</code> file with a <code>**#!/bin/more**</code>, and making it executable. The result is a self-listing documentation file. (A <a href="here-docs.html#HEREDOCREF">here document</a> using <a href="basic.html#CATREF">cat</a> is possibly a better alternative — see <a href="here-docs.html#EX71">Example 19-3</a>).</td>
+</tr>
+<tr>
+<td><a href="sha-bang.html#AEN256">[5]</a></td>
+<td><strong>P</strong>ortable <strong>O</strong>perating <strong>S</strong>ystem <em>I</em>nterface, an attempt to standardize UNI<strong>X</strong>-like OSes. The POSIX specifications are listed on the <a target="_blank" rel="noopener" href="http://www.opengroup.org/onlinepubs/007904975/toc.htm">Open Group site</a>.</td>
+</tr>
+<tr>
+<td><a href="sha-bang.html#AEN269">[6]</a></td>
+<td>To avoid this possibility, a script may begin with a <a href="system.html#ENVV2REF">#!/bin/env bash</a> <em>sha-bang</em> line. This may be useful on UNIX machines where <em>bash</em> is not located in <code>/bin</code></td>
+</tr>
+<tr>
+<td><a href="sha-bang.html#AEN279">[7]</a></td>
+<td>If <em>Bash</em> is your default shell, then the #! isn’t necessary at the beginning of a script. However, if launching a script from a different shell, such as <em>tcsh</em>, then you <em>will</em> need the #!.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="2-1-Invoking-the-script"><a href="#2-1-Invoking-the-script" class="headerlink" title="2.1. Invoking the script"></a>2.1. Invoking the script</h3><p>Having written the script, you can invoke it by <code>**sh scriptname**</code>, <a href="#FTN.AEN300">[1]</a> or alternatively <code>**bash scriptname**</code>. (Not recommended is using <code>**sh &lt;scriptname**</code>, since this effectively disables reading from <a href="ioredirintro.html#STDINOUTDEF"><code>stdin</code></a> within the script.) Much more convenient is to make the script itself directly executable with a <a href="basic.html#CHMODREF">chmod</a>.</p>
+<p>Either:</p>
+<p>​    <code>chmod 555 scriptname</code> (gives everyone read/execute permission) <a href="#FTN.AEN315">[2]</a></p>
+<p>or</p>
+<p>​    <code>chmod +rx scriptname</code> (gives everyone read/execute permission)</p>
+<p>​    <code>chmod u+rx scriptname</code> (gives only the script owner read/execute permission)</p>
+<p>Having made the script executable, you may now test it by <code>**./scriptname**</code>. <a href="#FTN.AEN327">[3]</a> If it begins with a “sha-bang” line, invoking the script calls the correct command interpreter to run it.</p>
+<p>As a final step, after testing and debugging, you would likely want to move it to <code>/usr/local/bin</code> (as <em>root</em>, of course), to make the script available to yourself and all other users as a systemwide executable. The script could then be invoked by simply typing <strong>scriptname</strong> <strong>[ENTER]</strong> from the command-line.</p>
+<p>Notes</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><a href="invoking.html#AEN300">[1]</a></th>
+<th>Caution: invoking a <em>Bash</em> script by <code>**sh scriptname**</code> turns off Bash-specific extensions, and the script may therefore fail to execute.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="invoking.html#AEN315">[2]</a></td>
+<td>A script needs <em>read</em>, as well as execute permission for it to run, since the shell needs to be able to read it.</td>
+</tr>
+<tr>
+<td><a href="invoking.html#AEN327">[3]</a></td>
+<td>Why not simply invoke the script with <code>**scriptname**</code>? If the directory you are in (<a href="internalvariables.html#PWDREF">$PWD</a>) is where 1 is located, why doesn’t this work? This fails because, for security reasons, the current directory (2) is not by default included in a user’s <a href="internalvariables.html#PATHREF">$PATH</a>. It is therefore necessary to explicitly invoke the script in the current directory with a <code>**./scriptname**</code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="2-2-Preliminary-Exercises"><a href="#2-2-Preliminary-Exercises" class="headerlink" title="2.2. Preliminary Exercises"></a>2.2. Preliminary Exercises</h3><ol>
+<li>System administrators often write scripts to automate common tasks. Give several instances where such scripts would be useful.</li>
+<li>Write a script that upon invocation shows the <a href="timedate.html#DATEREF">time and date</a>, <a href="system.html#WHOREF">lists all logged-in users</a>, and gives the system <a href="system.html#UPTIMEREF">uptime</a>. The script then <a href="io-redirection.html#IOREDIRREF">saves this information</a> to a logfile.</li>
+</ol>
+<h1 id="Part-2-Basics"><a href="#Part-2-Basics" class="headerlink" title="Part 2. Basics"></a>Part 2. Basics</h1><h2 id="Chapter-3-Special-Characters"><a href="#Chapter-3-Special-Characters" class="headerlink" title="Chapter 3. Special Characters"></a>Chapter 3. Special Characters</h2><p>What makes a character <em>special</em>? If it has a meaning beyond its <em>literal meaning</em>, a <a href="x17129.html#METAMEANINGREF">meta-meaning</a>, then we refer to it as a <em>special character</em>. Along with commands and <a href="internal.html#KEYWORDREF">keywords</a>, <em>special characters</em> are building blocks of Bash scripts.</p>
+<p><strong>Special Characters Found In Scripts and Elsewhere</strong></p>
+<ul>
+<li><p><strong>#</strong></p>
+<p><strong>Comments.</strong> Lines beginning with a # (with the exception of <a href="sha-bang.html#MAGNUMREF">#!</a>) are comments and will <em>not</em> be executed.</p>
+ <pre class="highlight"><span class="line"><span class="meta">#</span><span class="bash"> This line is a comment.</span></span><br></pre>
+<p>Comments may also occur following the end of a command.</p>
+</li>
+</ul>
+   <pre class="highlight"><span class="line">echo &quot;A comment will follow.&quot; # Comment here. </span><br><span class="line"><span class="meta">#</span><span class="bash">                            ^ Note whitespace before <span class="comment">#</span></span></span><br></pre>
+<p>  Comments may also follow <a href="special-chars.html#WHITESPACEREF">whitespace</a> at the beginning of a line.Comments may also follow <a href="special-chars.html#WHITESPACEREF">whitespace</a> at the beginning of a line.</p>
+  <pre class="highlight"><span class="line"><span class="meta">#</span><span class="bash"> A tab precedes this comment.</span></span><br></pre>
+<p>  Comments may even be embedded within a <a href="special-chars.html#PIPEREF">pipe</a>.</p>
+  <pre class="highlight"><span class="line">initial=( `cat &quot;$startfile&quot; | sed -e &#x27;/#/d&#x27; | tr -d &#x27;\n&#x27; |\</span><br><span class="line"><span class="meta">#</span><span class="bash"> Delete lines containing <span class="string">&#x27;#&#x27;</span> comment character.</span></span><br><span class="line">           sed -e &#x27;s/\./\. /g&#x27; -e &#x27;s/_/_ /g&#x27;` )</span><br><span class="line"><span class="meta">#</span><span class="bash"> Excerpted from life.sh script</span></span><br></pre>
+<p>  A command may not follow a comment on the same line. There is no method of terminating the comment, in order for “live code” to begin on the same line. Use a new line for the next command.</p>
+<p>  Of course, a <a href="quoting.html#QUOTINGREF">quoted</a> or an <a href="escapingsection.html#ESCP">escaped</a> # in an <a href="internal.html#ECHOREF">echo</a> statement does <em>not</em> begin a comment. Likewise, a # appears in <a href="parameter-substitution.html#PSUB2">certain parameter-substitution constructs</a> and in <a href="numerical-constants.html#NUMCONSTANTS">numerical constant expressions</a>.</p>
+  <pre class="highlight"><span class="line">echo &quot;The # here does not begin a comment.&quot;</span><br><span class="line">echo &#x27;The # here does not begin a comment.&#x27;</span><br><span class="line">echo The \# here does not begin a comment.</span><br><span class="line">echo The # here begins a comment.</span><br><span class="line"></span><br><span class="line">echo $&#123;PATH#*:&#125;       # Parameter substitution, not a comment.</span><br><span class="line">echo $(( 2#101011 ))  # Base conversion, not a comment.</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Thanks, S.C.</span></span><br></pre>
+<p>  The standard <a href="quoting.html#QUOTINGREF">quoting and escape</a> characters (“ ‘ ) escape the #.Certain <a href="parameter-substitution.html#PSOREX1">pattern matching operations</a> also use the #.</p>
+<ul>
+<li><p><strong>;</strong></p>
+<p><strong>Command separator [semicolon].</strong> Permits putting two or more commands on the same line.</p>
+<pre class="highlight"><span class="line">echo hello; echo there</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if [ -x &quot;$filename&quot; ]; then    #  Note the space after the semicolon.</span><br><span class="line"><span class="meta">#</span><span class="bash">+                   ^^</span></span><br><span class="line">  echo &quot;File $filename exists.&quot;; cp $filename $filename.bak</span><br><span class="line">else   #                       ^^</span><br><span class="line">  echo &quot;File $filename not found.&quot;; touch $filename</span><br><span class="line">fi; echo &quot;File test complete.&quot;</span><br></pre>
+</li>
+</ul>
+<p>  Note that the “;” <a href="moreadv.html#FINDREF0">sometimes needs to be <em>escaped</em></a>.</p>
+<ul>
+<li><p>;;</p>
+<p>**Terminator in a <a href="testbranch.html#CASEESAC1">case</a> option [double semicolon].</p>
+<pre class="highlight"><span class="line">case &quot;$variable&quot; in</span><br><span class="line">  abc)  echo &quot;\$variable = abc&quot; ;;</span><br><span class="line">  xyz)  echo &quot;\$variable = xyz&quot; ;;</span><br><span class="line">esac</span><br></pre>
+</li>
+</ul>
+<ul>
+<li><p><strong>;;&amp;, ;&amp;</strong></p>
+<p><strong><a href="bashver4.html#NCTERM">Terminators</a> in a *case* option (<a href="bashver4.html#BASH4REF">version 4+</a> of Bash).</strong></p>
+</li>
+<li><p><strong>.</strong></p>
+<p><strong>“dot” command [period].</strong> Equivalent to <a href="internal.html#SOURCEREF">source</a> (see <a href="internal.html#EX38">Example 15-22</a>). This is a bash <a href="internal.html#BUILTINREF">builtin</a>.</p>
+</li>
+<li><p><strong>.</strong></p>
+<p><strong>“dot”, as a component of a filename.</strong> When working with filenames, a leading dot is the prefix of a “hidden” file, a file that an <a href="basic.html#LSREF">ls</a> will not normally show.</p>
+<pre class="highlight"><span class="line"><span class="meta">bash$</span><span class="bash"> touch .hidden-file</span></span><br><span class="line"><span class="meta">bash$</span><span class="bash"> ls -l</span>	      </span><br><span class="line">total 10</span><br><span class="line"> -rw-r--r--    1 bozo      4034 Jul 18 22:04 data1.addressbook</span><br><span class="line"> -rw-r--r--    1 bozo      4602 May 25 13:58 data1.addressbook.bak</span><br><span class="line"> -rw-r--r--    1 bozo       877 Dec 17  2000 employment.addressbook</span><br><span class="line"></span><br><span class="line"><span class="meta">bash$</span><span class="bash"> ls -al</span>	      </span><br><span class="line">total 14</span><br><span class="line"> drwxrwxr-x    2 bozo  bozo      1024 Aug 29 20:54 ./</span><br><span class="line"> drwx------   52 bozo  bozo      3072 Aug 29 20:51 ../</span><br><span class="line"> -rw-r--r--    1 bozo  bozo      4034 Jul 18 22:04 data1.addressbook</span><br><span class="line"> -rw-r--r--    1 bozo  bozo      4602 May 25 13:58 data1.addressbook.bak</span><br><span class="line"> -rw-r--r--    1 bozo  bozo       877 Dec 17  2000 employment.addressbook</span><br><span class="line"> -rw-rw-r--    1 bozo  bozo         0 Aug 29 20:54 .hidden-file</span><br><span class="line">	        </span><br></pre>
+</li>
+</ul>
+<p>  When considering directory names, <em>a single dot</em> represents the current working directory, and <em>two dots</em> denote the parent directory.</p>
+  <pre class="highlight"><span class="line"><span class="meta">bash$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/home/bozo/projects</span><br><span class="line"></span><br><span class="line"><span class="meta">bash$</span><span class="bash"> <span class="built_in">cd</span> .</span></span><br><span class="line"><span class="meta">bash$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/home/bozo/projects</span><br><span class="line"></span><br><span class="line"><span class="meta">bash$</span><span class="bash"> <span class="built_in">cd</span> ..</span></span><br><span class="line"><span class="meta">bash$</span><span class="bash"> <span class="built_in">pwd</span></span></span><br><span class="line">/home/bozo/</span><br></pre>
+<p>  The <em>dot</em> often appears as the destination (directory) of a file movement command, in this context meaning <em>current directory</em>.  </p>
+  <pre class="highlight"><span class="line"><span class="meta">bash$</span><span class="bash"> cp /home/bozo/current_work/junk/* .</span></span><br></pre>
+<p>  Copy all the “junk” files to <a href="internalvariables.html#PWDREF">$PWD</a>.</p>
+<ul>
+<li><p><strong>.</strong></p>
+<p><strong>“dot” character match.</strong> When <a href="x17129.html#REGEXDOT">matching characters</a>, as part of a <a href="regexp.html#REGEXREF">regular expression</a>, a “dot” <a href="x17129.html#REGEXDOT">matches a single character</a>.</p>
+</li>
+<li><p><strong>“</strong></p>
+<p><strong><a href="varsubn.html#DBLQUO">partial quoting</a> [double quote].</strong> <em>“STRING”</em> preserves (from interpretation) most of the special characters within <em>STRING</em>. See <a href="quoting.html">Chapter 5</a>.</p>
+</li>
+<li><p><strong>‘</strong></p>
+<p><strong><a href="varsubn.html#SNGLQUO">full quoting</a> [single quote].</strong> <em>‘STRING’</em> preserves all special characters within <em>STRING</em>. This is a stronger form of quoting than <em>“STRING”</em>. See <a href="quoting.html">Chapter 5</a>.</p>
+</li>
+<li><p>,</p>
+<p><strong><a href="ops.html#COMMAOP">comma operator</a>.</strong> The <em>comma operator</em> <a href="#FTN.AEN612">[1]</a> links together a series of arithmetic operations. All are evaluated, but only the last one is returned.</p>
+<pre class="highlight"><span class="line">let &quot;t2 = ((a = 9, 15 / 3))&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> Set <span class="string">&quot;a = 9&quot;</span> and <span class="string">&quot;t2 = 15 / 3&quot;</span></span></span><br></pre>
+</li>
+</ul>
+<p>  The <em>comma</em> operator can also concatenate strings.</p>
+  <pre class="highlight"><span class="line"></span><br><span class="line">for file in /&#123;,usr/&#125;bin/*calc</span><br><span class="line"><span class="meta">#</span><span class="bash">             ^    Find all executable files ending <span class="keyword">in</span> <span class="string">&quot;calc&quot;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">+                 <span class="keyword">in</span> /bin and /usr/bin directories.</span></span><br><span class="line">do</span><br><span class="line">        if [ -x &quot;$file&quot; ]</span><br><span class="line">        then</span><br><span class="line">          echo $file</span><br><span class="line">        fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> /bin/ipcalc</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /usr/bin/kcalc</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /usr/bin/oidcalc</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /usr/bin/oocalc</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Thank you, Rory Winston, <span class="keyword">for</span> pointing this out.</span></span><br></pre>
+<ul>
+<li><p>,, ,</p>
+<p><strong><a href="bashver4.html#CASEMODPARAMSUB">Lowercase conversion</a> in *parameter substitution* (added in <a href="bashver4.html#BASH4REF">version 4</a> of Bash).</strong></p>
+</li>
+<li><p>\</p>
+<p><strong><a href="escapingsection.html#ESCP">escape</a> [backslash].</strong> A quoting mechanism for single characters.<code>**\X**</code> <em>escapes</em> the character <em>X</em>. This has the effect of “quoting” <em>X</em>, equivalent to <em>‘X’</em>. The \ may be used to quote “ and ‘, so they are expressed literally.See <a href="quoting.html">Chapter 5</a> for an in-depth explanation of escaped characters.</p>
+</li>
+<li><p>/</p>
+<p><strong>Filename path separator [forward slash].</strong> Separates the components of a filename (as in <code>/home/bozo/projects/Makefile</code>).This is also the division <a href="ops.html#AROPS1">arithmetic operator</a>.</p>
+</li>
+<li><p>`</p>
+<p><strong><a href="commandsub.html#COMMANDSUBREF">command substitution</a>.</strong> The <strong><code>command</code></strong> construct makes available the output of <strong>command</strong> for assignment to a variable. This is also known as <a href="commandsub.html#BACKQUOTESREF">backquotes</a> or backticks.</p>
+</li>
+<li><p>:</p>
+<p><strong>null command [colon].</strong> This is the shell equivalent of a “NOP” (<code>*no op*</code>, a do-nothing operation). It may be considered a synonym for the shell builtin <a href="internal.html#TRUEREF">true</a>. The “:” command is itself a <em>Bash</em> <a href="internal.html#BUILTINREF">builtin</a>, and its <a href="exit-status.html#EXITSTATUSREF">exit status</a> is <em>true</em> (0).</p>
+<pre class="highlight"><span class="line">:</span><br><span class="line">echo $?   # 0</span><br></pre>
+</li>
+</ul>
+<p>  Endless loop:</p>
+  <pre class="highlight"><span class="line">while :</span><br><span class="line">do</span><br><span class="line">   operation-1</span><br><span class="line">   operation-2</span><br><span class="line">   ...</span><br><span class="line">   operation-n</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Same as:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    <span class="keyword">while</span> <span class="literal">true</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">    <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">      ...</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    <span class="keyword">done</span></span></span><br></pre>
+<p>  Placeholder in if/then test:</p>
+  <pre class="highlight"><span class="line">if condition</span><br><span class="line">then :   # Do nothing and branch ahead</span><br><span class="line">else     # Or else ...</span><br><span class="line">   take-some-action</span><br><span class="line">fi</span><br></pre>
+<p>  Provide a placeholder where a binary operation is expected, see <a href="ops.html#ARITHOPS">Example 8-2</a> and <a href="parameter-substitution.html#DEFPARAM">default parameters</a>.</p>
+  <pre class="highlight"><span class="line">: $&#123;username=`whoami`&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="variable">$&#123;username=`whoami`&#125;</span>   Gives an error without the leading :</span></span><br><span class="line"><span class="meta">#</span><span class="bash">                        unless <span class="string">&quot;username&quot;</span> is a <span class="built_in">command</span> or <span class="built_in">builtin</span>...</span></span><br><span class="line"></span><br><span class="line">: $&#123;1?&quot;Usage: $0 ARGUMENT&quot;&#125;     # From &quot;usage-message.sh example script.</span><br></pre>
+<p>  Provide a placeholder where a command is expected in a <a href="here-docs.html#HEREDOCREF">here document</a>. See <a href="here-docs.html#ANONHEREDOC">Example 19-10</a>.Evaluate string of variables using <a href="parameter-substitution.html#PARAMSUBREF">parameter substitution</a> (as in <a href="parameter-substitution.html#EX6">Example 10-7</a>).</p>
+  <pre class="highlight"><span class="line">: $&#123;HOSTNAME?&#125; $&#123;USER?&#125; $&#123;MAIL?&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash">  Prints error message</span></span><br><span class="line"><span class="meta">#</span><span class="bash">+ <span class="keyword">if</span> one or more of essential environmental variables not <span class="built_in">set</span>.</span></span><br></pre>
+<p>  <strong><a href="parameter-substitution.html#EXPREPL1">Variable expansion / substring replacement</a></strong>.In combination with the &gt; <a href="io-redirection.html#IOREDIRREF">redirection operator</a>, truncates a file to zero length, without changing its permissions. If the file did not previously exist, creates it.</p>
+  <pre class="highlight"><span class="line">: &gt; data.xxx   # File &quot;data.xxx&quot; now empty.	      </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Same effect as   cat /dev/null &gt;data.xxx</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> However, this does not fork a new process, since <span class="string">&quot;:&quot;</span> is a <span class="built_in">builtin</span>.</span></span><br></pre>
+<p>  See also <a href="textproc.html#EX12">Example 16-15</a>.In combination with the &gt;&gt; redirection operator, has no effect on a pre-existing target file (<code>**: &gt;&gt; target_file**</code>). If the file did not previously exist, creates it.This applies to regular files, not pipes, symlinks, and certain special files.May be used to begin a comment line, although this is not recommended. Using # for a comment turns off error checking for the remainder of that line, so almost anything may appear in a comment. However, this is not the case with :</p>
+  <pre class="highlight"><span class="line">: This is a comment that generates an error, ( if [ $x -eq 3] ).</span><br></pre>
+<p>  The “:” serves as a <a href="special-chars.html#FIELDREF">field</a> separator, in <a href="files.html#DATAFILESREF1"><code>/etc/passwd</code></a>, and in the <a href="internalvariables.html#PATHREF">$PATH</a> variable.</p>
+  <pre class="highlight"><span class="line"><span class="meta">bash$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$PATH</span></span></span><br><span class="line">/usr/local/bin:/bin:/usr/bin:/usr/X11R6/bin:/sbin:/usr/sbin:/usr/games</span><br></pre>
+<p>  A <em>colon</em> is <a href="functions.html#FSTRANGEREF">acceptable as a function name</a>.</p>
+  <pre class="highlight"><span class="line">:()</span><br><span class="line">&#123;</span><br><span class="line">  echo &quot;The name of this function is &quot;$FUNCNAME&quot; &quot;</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Why use a colon as a <span class="keyword">function</span> name?</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> It<span class="string">&#x27;s a way of obfuscating your code.</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">:</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> The name of this <span class="keyword">function</span> is :</span></span><br></pre>
+<p>  This is not <a href="portabilityissues.html">portable</a> behavior, and therefore not a recommended practice. In fact, more recent releases of Bash do not permit this usage. An underscore <strong>_</strong> works, though.A <em>colon</em> can serve as a placeholder in an otherwise empty function.</p>
+  <pre class="highlight"><span class="line">not_empty ()</span><br><span class="line">&#123;</span><br><span class="line">  :</span><br><span class="line">&#125; # Contains a : (null command), and so is not empty.</span><br></pre>
+<ul>
+<li><p>!</p>
+<p><strong>reverse (or negate) the sense of a test or exit status [bang].</strong> The ! operator inverts the <a href="exit-status.html#EXITSTATUSREF">exit status</a> of the command to which it is applied (see <a href="exit-status.html#NEGCOND">Example 6-2</a>). It also inverts the meaning of a test operator. This can, for example, change the sense of <em>equal</em> ( <a href="comparison-ops.html#EQUALSIGNREF">=</a> ) to <em>not-equal</em> ( != ). The ! operator is a Bash <a href="internal.html#KEYWORDREF">keyword</a>.In a different context, the ! also appears in <a href="ivr.html#IVRREF">indirect variable references</a>.In yet another context, from the <em>command line</em>, the ! invokes the Bash <em>history mechanism</em> (see <a href="histcommands.html">Appendix L</a>). Note that within a script, the history mechanism is disabled.</p>
+</li>
+<li><p>*</p>
+<p><strong>wild card [asterisk].</strong> The * character serves as a “wild card” for filename expansion in <a href="globbingref.html">globbing</a>. By itself, it matches every filename in a given directory.</p>
+<pre class="highlight"><span class="line"><span class="meta">bash$</span><span class="bash"> <span class="built_in">echo</span> *</span></span><br><span class="line">abs-book.sgml add-drive.sh agram.sh alias.sh</span><br></pre>
+</li>
+</ul>
+<p>  The * also represents <a href="x17129.html#ASTERISKREG">any number (or zero) characters</a> in a <a href="regexp.html#REGEXREF">regular expression</a>.</p>
+<ul>
+<li><p>*</p>
+<p><strong><a href="ops.html#AROPS1">arithmetic operator</a>.</strong> In the context of arithmetic operations, the <em> denotes multiplication.** A double asterisk can represent the <a href="ops.html#EXPONENTIATIONREF">exponentiation</a> operator or <a href="bashver4.html#GLOBSTARREF">extended file-match</a> </em>globbing*.</p>
+</li>
+<li><p>?</p>
+<p><strong>test operator.</strong> Within certain expressions, the ? indicates a test for a condition.In a <a href="dblparens.html">double-parentheses construct</a>, the ? can serve as an element of a C-style <em>trinary</em> operator. <a href="#FTN.AEN888">[2]</a><code>condition</code><strong>?</strong><code>result-if-true</code><strong>:</strong>`result-if-false``</p>
+<pre class="highlight"><span class="line">(( var0 = var1&lt;98?9:21 ))</span><br><span class="line"><span class="meta">#</span><span class="bash">                ^ ^</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$var1</span>&quot;</span> -lt 98 ]</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">then</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   var0=9</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   var0=21</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">fi</span></span></span><br></pre>
+</li>
+</ul>
+<p>  a <a href="parameter-substitution.html#PARAMSUBREF">parameter substitution</a> expression, the ? <a href="parameter-substitution.html#QERRMSG">tests whether a variable has been set</a>.</p>
+<ul>
+<li><p>?</p>
+<p><strong>wild card.</strong> The ? character serves as a single-character “wild card” for filename expansion in <a href="globbingref.html">globbing</a>, as well as <a href="x17129.html#QUEXREGEX">representing one character</a> in an <a href="x17129.html#EXTREGEX">extended regular expression</a>.</p>
+</li>
+<li><p>$</p>
+<p><strong><a href="varsubn.html">Variable substitution</a> (contents of a variable).</strong></p>
+<pre class="highlight"><span class="line">var1&#x3D;5</span><br><span class="line">var2&#x3D;23skidoo</span><br><span class="line"></span><br><span class="line">echo $var1     # 5</span><br><span class="line">echo $var2     # 23skidoo</span><br></pre>
+</li>
+</ul>
+<p>  A $ prefixing a variable name indicates the <em>value</em> the variable holds.</p>
+<ul>
+<li><p>$</p>
+<p><strong>end-of-line.</strong> In a <a href="regexp.html#REGEXREF">regular expression</a>, a “$” addresses the <a href="x17129.html#DOLLARSIGNREF">end of a line</a> of text.</p>
+</li>
+<li><p>${}</p>
+<p><strong><a href="parameter-substitution.html#PARAMSUBREF">Parameter substitution</a>.</strong></p>
+</li>
+<li><p>$’ … ‘</p>
+<p><strong><a href="escapingsection.html#STRQ">Quoted string expansion</a>.</strong> This construct expands single or multiple escaped octal or hex values into ASCII <a href="#FTN.AEN1001">[3]</a> or <a href="bashver4.html#UNICODEREF">Unicode</a> characters.</p>
+</li>
+<li><p>$*, $@</p>
+<p><strong><a href="internalvariables.html#APPREF">positional parameters</a>.</strong></p>
+</li>
+<li><p>$?</p>
+<p><strong>exit status variable.</strong> The <a href="exit-status.html#EXSREF">$? variable</a> holds the <a href="exit-status.html#EXITSTATUSREF">exit status</a> of a command, a <a href="functions.html#FUNCTIONREF">function</a>, or of the script itself.</p>
+</li>
+<li><p>$$</p>
+<p><strong>process ID variable.</strong> The <a href="internalvariables.html#PROCCID">$$ variable</a> holds the <em>process ID</em> <a href="#FTN.AEN1071">[4]</a> of the script in which it appears.</p>
+</li>
+</ul>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://www.xeby.me/about">Marcus Xe</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://www.xeby.me/2021/01/21/Advanced%20Bash-Scripting%20Guide/">http://www.xeby.me/2021/01/21/Advanced%20Bash-Scripting%20Guide/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2021/01/26/kvm-on-Arch/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+        <div class="nav-title">kvm on Arch </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2021/01/21/QAPF-Graph/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+        <div class="nav-title">QAPF Graph </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Advanced-Bash-Scripting-Guide"><span class="toc-text">Advanced Bash-Scripting Guide</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#An-in-depth-exploration-of-the-art-of-shell-scripting"><span class="toc-text">An in-depth exploration of the art of shell scripting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mendel-Cooper"><span class="toc-text">Mendel Cooper</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dedication"><span class="toc-text">Dedication</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-1-Introduction"><span class="toc-text">Part 1. Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-1-Shell-Programming"><span class="toc-text">Chapter 1. Shell Programming!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-2-Starting-Off-With-a-Sha-Bang"><span class="toc-text">Chapter 2. Starting Off With a Sha-Bang</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Invoking-the-script"><span class="toc-text">2.1. Invoking the script</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Preliminary-Exercises"><span class="toc-text">2.2. Preliminary Exercises</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-2-Basics"><span class="toc-text">Part 2. Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-3-Special-Characters"><span class="toc-text">Chapter 3. Special Characters</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/icon.png" class="author-img">
+
+<p class="author-name">Marcus Xe</p>
+<p class="author-description"></p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>14</span>
+    <span>Posts</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>3</span>
+    <span>Categories</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>3</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Advanced-Bash-Scripting-Guide"><span class="toc-text">Advanced Bash-Scripting Guide</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#An-in-depth-exploration-of-the-art-of-shell-scripting"><span class="toc-text">An in-depth exploration of the art of shell scripting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mendel-Cooper"><span class="toc-text">Mendel Cooper</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dedication"><span class="toc-text">Dedication</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-1-Introduction"><span class="toc-text">Part 1. Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-1-Shell-Programming"><span class="toc-text">Chapter 1. Shell Programming!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-2-Starting-Off-With-a-Sha-Bang"><span class="toc-text">Chapter 2. Starting Off With a Sha-Bang</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Invoking-the-script"><span class="toc-text">2.1. Invoking the script</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Preliminary-Exercises"><span class="toc-text">2.2. Preliminary Exercises</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-2-Basics"><span class="toc-text">Part 2. Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-3-Special-Characters"><span class="toc-text">Chapter 3. Special Characters</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-list">
+    
+      <a href="/categories/Geography">
+        <div class="categories-list-item">
+          Geography
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/DataBase">
+        <div class="categories-list-item">
+          DataBase
+          <span class="categories-list-item-badge">9</span>
+        </div>
+      </a>
+    
+      <a href="/categories/HardWare">
+        <div class="categories-list-item">
+          HardWare
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-list">
+    
+    <a href="\tags\Oracle" title="Oracle"><div class="tags-list-item">Oracle</div></a>
+    
+    <a href="\tags\Archtacture" title="Archtacture"><div class="tags-list-item">Archtacture</div></a>
+    
+    <a href="\tags\Rocks" title="Rocks"><div class="tags-list-item">Rocks</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Advanced-Bash-Scripting-Guide"><span class="toc-text">Advanced Bash-Scripting Guide</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#An-in-depth-exploration-of-the-art-of-shell-scripting"><span class="toc-text">An in-depth exploration of the art of shell scripting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mendel-Cooper"><span class="toc-text">Mendel Cooper</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dedication"><span class="toc-text">Dedication</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-1-Introduction"><span class="toc-text">Part 1. Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-1-Shell-Programming"><span class="toc-text">Chapter 1. Shell Programming!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-2-Starting-Off-With-a-Sha-Bang"><span class="toc-text">Chapter 2. Starting Off With a Sha-Bang</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Invoking-the-script"><span class="toc-text">2.1. Invoking the script</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Preliminary-Exercises"><span class="toc-text">2.2. Preliminary Exercises</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-2-Basics"><span class="toc-text">Part 2. Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-3-Special-Characters"><span class="toc-text">Chapter 3. Special Characters</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-02-08</div>
+        <a href="/2021/02/08/Morse-Code/"><div class="recent-posts-item-content">Morse Code</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-01-26</div>
+        <a href="/2021/01/26/kvm-on-Arch/"><div class="recent-posts-item-content">kvm on Arch</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-01-21</div>
+        <a href="/2021/01/21/Advanced Bash-Scripting Guide/"><div class="recent-posts-item-content">索引(Index)</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-01-21</div>
+        <a href="/2021/01/21/QAPF-Graph/"><div class="recent-posts-item-content">QAPF Graph</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2021
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">Bi Hop </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+
+  
+  
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    
+<script src="//cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-svg.js"></script>
+
+  
+
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>
