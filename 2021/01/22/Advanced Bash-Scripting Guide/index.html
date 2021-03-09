@@ -14,7 +14,7 @@
   <meta property="og:title" content="Advanced Bash-Scripting Guide">
   
   
-  <meta property="og:url" content="http://www.xeby.me/2021/01/21/Advanced%20Bash-Scripting%20Guide/index.html">
+  <meta property="og:url" content="http://www.xeby.me/2021/01/22/Advanced%20Bash-Scripting%20Guide/index.html">
   
   
   <meta property="og:img" content="/img/icon.png">
@@ -22,12 +22,12 @@
   
   
   <meta property="og:type" content="article">
-  <meta property="og:article:published_time" content="2021-01-21">
+  <meta property="og:article:published_time" content="2021-01-22">
   <meta property="og:article:modified_time" content="2021-02-14">
   <meta property="og:article:author" content="Marcus Xe">
   
   
-  <meta property="og:article:tag" content="Oracle">
+  <meta property="og:article:tag" content="Bash">
   
   
   
@@ -145,37 +145,37 @@
     
     <a href="/" class="navbar-menu-item">
     
-    Home
+    首页
     
     </a>
     
     <a href="/archives" class="navbar-menu-item">
     
-    Archive
+    归档
     
     </a>
     
     <a href="/tags" class="navbar-menu-item">
     
-    Tags
+    标签
     
     </a>
     
     <a href="/categories" class="navbar-menu-item">
     
-    Categories
+    分类
     
     </a>
     
     <a href="/about" class="navbar-menu-item">
     
-    About
+    关于
     
     </a>
     
     <a href="/links" class="navbar-menu-item">
     
-    Friends
+    友链
     
     </a>
     
@@ -200,19 +200,19 @@
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2021-01-21T08:05:04.000Z">
+    <time datetime="2021-01-22T08:05:04.000Z">
       <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
-      <span>2021-01-21</span>
+      <span>2021-01-22</span>
     </time>
     
     <span class="dot"></span>
     
-    <a href="/categories/DataBase/" class="post-meta-link">DataBase</a>
+    <a href="/categories/Programming-Languages/" class="post-meta-link">Programming Languages</a>
     
     
     
     <span class="dot"></span>
-    <span>4.9k words</span>
+    <span>4.9k 字</span>
     
   </div>
   
@@ -221,14 +221,14 @@
       <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
       
       
-        <a href="/tags/Oracle/" class="post-meta-link">Oracle</a>
+        <a href="/tags/Bash/" class="post-meta-link">Bash</a>
       
     </div>
   </div>
   
   </header>
   <div id="section" class="post-content">
-    <h1 id="Advanced-Bash-Scripting-Guide"><a href="#Advanced-Bash-Scripting-Guide" class="headerlink" title="Advanced Bash-Scripting Guide"></a>Advanced Bash-Scripting Guide</h1><h2 id="An-in-depth-exploration-of-the-art-of-shell-scripting"><a href="#An-in-depth-exploration-of-the-art-of-shell-scripting" class="headerlink" title="An in-depth exploration of the art of shell scripting"></a>An in-depth exploration of the art of shell scripting</h2><h3 id="Mendel-Cooper"><a href="#Mendel-Cooper" class="headerlink" title="Mendel Cooper"></a>Mendel Cooper</h3><p>This tutorial assumes no previous knowledge of scripting or programming, yet progresses rapidly toward an intermediate/advanced level of instruction . . . all the while sneaking in little nuggets of UNIX® wisdom and lore. It serves as a textbook, a manual for self-study, and as a reference and source of knowledge on shell scripting techniques. The exercises and heavily-commented examples invite active reader participation, under the premise that <code>the only way to really learn scripting is to write scripts</code> .<br>This book is suitable for classroom use as a general introduction to programming concepts.<br>This document is herewith granted to the Public Domain. <code>No copyright!</code></p>
+    <h1 id="高级Bash脚本指南"><a href="#高级Bash脚本指南" class="headerlink" title="高级Bash脚本指南"></a>高级Bash脚本指南</h1><h2 id="对Shell编程艺术的深入探讨"><a href="#对Shell编程艺术的深入探讨" class="headerlink" title="对Shell编程艺术的深入探讨"></a>对Shell编程艺术的深入探讨</h2><p>This tutorial assumes no previous knowledge of scripting or programming, yet progresses rapidly toward an intermediate/advanced level of instruction . . . all the while sneaking in little nuggets of UNIX® wisdom and lore. It serves as a textbook, a manual for self-study, and as a reference and source of knowledge on shell scripting techniques. The exercises and heavily-commented examples invite active reader participation, under the premise that <code>the only way to really learn scripting is to write scripts</code> .<br>This book is suitable for classroom use as a general introduction to programming concepts.<br>This document is herewith granted to the Public Domain. <code>No copyright!</code></p>
 <h2 id="Dedication"><a href="#Dedication" class="headerlink" title="Dedication"></a>Dedication</h2><p>For Anita, the source of all the magic.</p>
 <h1 id="Part-1-Introduction"><a href="#Part-1-Introduction" class="headerlink" title="Part 1. Introduction"></a>Part 1. Introduction</h1><pre><code>Script: A writing; a written document. [Obs.]
 --Webster&#39;s Dictionary, 1913 ed.
@@ -506,7 +506,7 @@
 </li>
 <li><p>?</p>
 <p><strong>test operator.</strong> Within certain expressions, the ? indicates a test for a condition.In a <a href="dblparens.html">double-parentheses construct</a>, the ? can serve as an element of a C-style <em>trinary</em> operator. <a href="#FTN.AEN888">[2]</a><code>condition</code><strong>?</strong><code>result-if-true</code><strong>:</strong>`result-if-false``</p>
-<pre class="highlight"><span class="line">(( var0 = var1&lt;98?9:21 ))</span><br><span class="line"><span class="meta">#</span><span class="bash">                ^ ^</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$var1</span>&quot;</span> -lt 98 ]</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">then</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   var0=9</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   var0=21</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">fi</span></span></span><br></pre>
+<pre class="highlight"><span class="line">(( var0 = var1&lt;98?9:21 ))</span><br><span class="line"><span class="meta">#</span><span class="bash">                ^ ^</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$var1</span>&quot;</span> -lt 98 ]:</span> </span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">then</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   var0=9</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   var0=21</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">fi</span></span></span><br></pre>
 </li>
 </ul>
 <p>  a <a href="parameter-substitution.html#PARAMSUBREF">parameter substitution</a> expression, the ? <a href="parameter-substitution.html#QERRMSG">tests whether a variable has been set</a>.</p>
@@ -516,7 +516,7 @@
 </li>
 <li><p>$</p>
 <p><strong><a href="varsubn.html">Variable substitution</a> (contents of a variable).</strong></p>
-<pre class="highlight"><span class="line">var1&#x3D;5</span><br><span class="line">var2&#x3D;23skidoo</span><br><span class="line"></span><br><span class="line">echo $var1     # 5</span><br><span class="line">echo $var2     # 23skidoo</span><br></pre>
+<pre class="highlight"><span class="line">var1=5</span><br><span class="line">var2=23skidoo</span><br><span class="line"></span><br><span class="line">echo $var1     # 5</span><br><span class="line">echo $var2     # 23skidoo</span><br></pre>
 </li>
 </ul>
 <p>  A $ prefixing a variable name indicates the <em>value</em> the variable holds.</p>
@@ -546,7 +546,7 @@
   
   <div class="post-note note-warning copyright" style="margin-top: 42px">
     <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://www.xeby.me/about">Marcus Xe</a></p>
-    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://www.xeby.me/2021/01/21/Advanced%20Bash-Scripting%20Guide/">http://www.xeby.me/2021/01/21/Advanced%20Bash-Scripting%20Guide/</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="http://www.xeby.me/2021/01/22/Advanced%20Bash-Scripting%20Guide/">http://www.xeby.me/2021/01/22/Advanced%20Bash-Scripting%20Guide/</a></p>
     <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
   </div>
   
@@ -558,7 +558,7 @@
     <a href="/2021/01/26/kvm-on-Arch/" class="nav-link">
       <i class="iconfont icon-left nav-prev-icon"></i>
       <div>
-        <div class="nav-label">Prev</div>
+        <div class="nav-label">上一篇</div>
         
         <div class="nav-title">kvm on Arch </div>
         
@@ -570,7 +570,7 @@
   <div class="nav-item-next">
     <a href="/2021/01/21/QAPF-Graph/" class="nav-link">
       <div>
-        <div class="nav-label">Next</div>
+        <div class="nav-label">下一篇</div>
         
         <div class="nav-title">QAPF Graph </div>
         
@@ -582,8 +582,8 @@
 </div>
 
 <div class="card card-content toc-card" id="mobiletoc">
-  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Advanced-Bash-Scripting-Guide"><span class="toc-text">Advanced Bash-Scripting Guide</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#An-in-depth-exploration-of-the-art-of-shell-scripting"><span class="toc-text">An in-depth exploration of the art of shell scripting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mendel-Cooper"><span class="toc-text">Mendel Cooper</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dedication"><span class="toc-text">Dedication</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-1-Introduction"><span class="toc-text">Part 1. Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-1-Shell-Programming"><span class="toc-text">Chapter 1. Shell Programming!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-2-Starting-Off-With-a-Sha-Bang"><span class="toc-text">Chapter 2. Starting Off With a Sha-Bang</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Invoking-the-script"><span class="toc-text">2.1. Invoking the script</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Preliminary-Exercises"><span class="toc-text">2.2. Preliminary Exercises</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-2-Basics"><span class="toc-text">Part 2. Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-3-Special-Characters"><span class="toc-text">Chapter 3. Special Characters</span></a></li></ol></li></ol>
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7Bash%E8%84%9A%E6%9C%AC%E6%8C%87%E5%8D%97"><span class="toc-text">高级Bash脚本指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9Shell%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF%E7%9A%84%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8"><span class="toc-text">对Shell编程艺术的深入探讨</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dedication"><span class="toc-text">Dedication</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-1-Introduction"><span class="toc-text">Part 1. Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-1-Shell-Programming"><span class="toc-text">Chapter 1. Shell Programming!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-2-Starting-Off-With-a-Sha-Bang"><span class="toc-text">Chapter 2. Starting Off With a Sha-Bang</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Invoking-the-script"><span class="toc-text">2.1. Invoking the script</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Preliminary-Exercises"><span class="toc-text">2.2. Preliminary Exercises</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-2-Basics"><span class="toc-text">Part 2. Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-3-Special-Characters"><span class="toc-text">Chapter 3. Special Characters</span></a></li></ol></li></ol>
 </div></main>
           <aside class="left-column">
             
@@ -595,16 +595,16 @@
 <p class="author-description"></p>
 <div class="author-message">
   <a class="author-posts-count" href="/archives">
-    <span>14</span>
-    <span>Posts</span>
+    <span>15</span>
+    <span>文章</span>
   </a>
   <a class="author-categories-count" href="/categories">
-    <span>3</span>
-    <span>Categories</span>
+    <span>5</span>
+    <span>分类</span>
   </a>
   <a class="author-tags-count" href="/tags">
-    <span>3</span>
-    <span>Tags</span>
+    <span>5</span>
+    <span>标签</span>
   </a>
 </div>
 
@@ -615,15 +615,15 @@
   
   <article class="display-when-two-columns spacer">
     <div class="card card-content toc-card">
-      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Advanced-Bash-Scripting-Guide"><span class="toc-text">Advanced Bash-Scripting Guide</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#An-in-depth-exploration-of-the-art-of-shell-scripting"><span class="toc-text">An in-depth exploration of the art of shell scripting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mendel-Cooper"><span class="toc-text">Mendel Cooper</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dedication"><span class="toc-text">Dedication</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-1-Introduction"><span class="toc-text">Part 1. Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-1-Shell-Programming"><span class="toc-text">Chapter 1. Shell Programming!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-2-Starting-Off-With-a-Sha-Bang"><span class="toc-text">Chapter 2. Starting Off With a Sha-Bang</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Invoking-the-script"><span class="toc-text">2.1. Invoking the script</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Preliminary-Exercises"><span class="toc-text">2.2. Preliminary Exercises</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-2-Basics"><span class="toc-text">Part 2. Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-3-Special-Characters"><span class="toc-text">Chapter 3. Special Characters</span></a></li></ol></li></ol>
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7Bash%E8%84%9A%E6%9C%AC%E6%8C%87%E5%8D%97"><span class="toc-text">高级Bash脚本指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9Shell%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF%E7%9A%84%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8"><span class="toc-text">对Shell编程艺术的深入探讨</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dedication"><span class="toc-text">Dedication</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-1-Introduction"><span class="toc-text">Part 1. Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-1-Shell-Programming"><span class="toc-text">Chapter 1. Shell Programming!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-2-Starting-Off-With-a-Sha-Bang"><span class="toc-text">Chapter 2. Starting Off With a Sha-Bang</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Invoking-the-script"><span class="toc-text">2.1. Invoking the script</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Preliminary-Exercises"><span class="toc-text">2.2. Preliminary Exercises</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-2-Basics"><span class="toc-text">Part 2. Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-3-Special-Characters"><span class="toc-text">Chapter 3. Special Characters</span></a></li></ol></li></ol>
     </div>
   </article>
   
   
   <article class="card card-content categories-widget">
     <div class="categories-card">
-  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
   <div class="categories-list">
     
       <a href="/categories/Geography">
@@ -636,7 +636,7 @@
       <a href="/categories/DataBase">
         <div class="categories-list-item">
           DataBase
-          <span class="categories-list-item-badge">9</span>
+          <span class="categories-list-item-badge">8</span>
         </div>
       </a>
     
@@ -647,16 +647,34 @@
         </div>
       </a>
     
+      <a href="/categories/Programming Languages">
+        <div class="categories-list-item">
+          Programming Languages
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Linux">
+        <div class="categories-list-item">
+          Linux
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
   </div>
 </div>
   </article>
   
   <article class="card card-content tags-widget">
     <div class="tags-card">
-  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
   <div class="tags-list">
     
     <a href="\tags\Oracle" title="Oracle"><div class="tags-list-item">Oracle</div></a>
+    
+    <a href="\tags\Arch Manjaro Kernel" title="Arch Manjaro Kernel"><div class="tags-list-item">Arch Manjaro Kernel</div></a>
+    
+    <a href="\tags\Bash" title="Bash"><div class="tags-list-item">Bash</div></a>
     
     <a href="\tags\Archtacture" title="Archtacture"><div class="tags-list-item">Archtacture</div></a>
     
@@ -674,15 +692,20 @@
   
   
   <article class="card card-content toc-card">
-    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Advanced-Bash-Scripting-Guide"><span class="toc-text">Advanced Bash-Scripting Guide</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#An-in-depth-exploration-of-the-art-of-shell-scripting"><span class="toc-text">An in-depth exploration of the art of shell scripting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mendel-Cooper"><span class="toc-text">Mendel Cooper</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dedication"><span class="toc-text">Dedication</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-1-Introduction"><span class="toc-text">Part 1. Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-1-Shell-Programming"><span class="toc-text">Chapter 1. Shell Programming!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-2-Starting-Off-With-a-Sha-Bang"><span class="toc-text">Chapter 2. Starting Off With a Sha-Bang</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Invoking-the-script"><span class="toc-text">2.1. Invoking the script</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Preliminary-Exercises"><span class="toc-text">2.2. Preliminary Exercises</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-2-Basics"><span class="toc-text">Part 2. Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-3-Special-Characters"><span class="toc-text">Chapter 3. Special Characters</span></a></li></ol></li></ol>
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7Bash%E8%84%9A%E6%9C%AC%E6%8C%87%E5%8D%97"><span class="toc-text">高级Bash脚本指南</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9Shell%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF%E7%9A%84%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8"><span class="toc-text">对Shell编程艺术的深入探讨</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dedication"><span class="toc-text">Dedication</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-1-Introduction"><span class="toc-text">Part 1. Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-1-Shell-Programming"><span class="toc-text">Chapter 1. Shell Programming!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-2-Starting-Off-With-a-Sha-Bang"><span class="toc-text">Chapter 2. Starting Off With a Sha-Bang</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Invoking-the-script"><span class="toc-text">2.1. Invoking the script</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Preliminary-Exercises"><span class="toc-text">2.2. Preliminary Exercises</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Part-2-Basics"><span class="toc-text">Part 2. Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Chapter-3-Special-Characters"><span class="toc-text">Chapter 3. Special Characters</span></a></li></ol></li></ol>
   </article>
   
   
   <article class="card card-content">
     <div class="recent-posts-card">
-  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
   <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2021-03-09</div>
+        <a href="/2021/03/09/Linux内核损坏修复/"><div class="recent-posts-item-content">Linux内核损坏修复</div></a>
+      </div>
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2021-02-08</div>
@@ -695,13 +718,8 @@
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-01-21</div>
-        <a href="/2021/01/21/Advanced Bash-Scripting Guide/"><div class="recent-posts-item-content">Advanced Bash-Scripting Guide</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-01-21</div>
-        <a href="/2021/01/21/QAPF-Graph/"><div class="recent-posts-item-content">QAPF Graph</div></a>
+        <div class="recent-posts-item-title">2021-01-22</div>
+        <a href="/2021/01/22/Advanced Bash-Scripting Guide/"><div class="recent-posts-item-content">Advanced Bash-Scripting Guide</div></a>
       </div>
     
   </div>
