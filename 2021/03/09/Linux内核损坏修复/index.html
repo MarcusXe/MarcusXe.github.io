@@ -23,7 +23,7 @@
   
   <meta property="og:type" content="article">
   <meta property="og:article:published_time" content="2021-03-09">
-  <meta property="og:article:modified_time" content="2021-03-09">
+  <meta property="og:article:modified_time" content="2021-03-10">
   <meta property="og:article:author" content="Marcus Xe">
   
   
@@ -235,7 +235,7 @@
 <p>Grub Shell，<code>ls (hd0,gpt7)\</code>确实没有内核文件。</p>
 <ol>
 <li>重启进入Windows，从USTC镜像站下载Manjaro镜像，rufus烧进U盘，重启，F12引导U盘启动。</li>
-<li>dolphin查看原来分区里都存了些啥，判断是<code>/</code> <code>/var</code> <code>/boot</code> <code>/boot/sys</code>等，看不懂的查看<code>/etc/fstab</code>对对照<code>blkid</code>。对比uuid。</li>
+<li>dolphin查看原来分区里都存了些啥，判断是<code>/</code> <code>/var</code> <code>/boot</code> <code>/boot</code> <code>/usr</code>等，看不懂的查看<code>/etc/fstab</code>对对照<code>blkid</code>。对比uuid。</li>
 <li><code>mkdir tmp</code> <code>mount  \ tmp</code>类推挂载其他分区到相应目录。</li>
 <li>将当前liveusb的<code>/dev</code> <code>/sys</code> <code>/proc</code>目录以<code>--bind</code>参数<code>绑定挂载</code>至以旧系统目录内相应位置（因为当我们切换环境后，这些虚拟文件目录对于不是正常启动的系统来说是个空的或者无法预料的内容，需将当前正常内容作为暂用）</li>
 <li><code>cd tmp</code>切入要修复系统根目录，<code>chroot .</code>切换运行环境至此，默认root权限，相当于单用户维护模式。</li>
@@ -363,15 +363,15 @@
   <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
   <div class="tags-list">
     
-    <a href="\tags\Oracle" title="Oracle"><div class="tags-list-item">Oracle</div></a>
-    
-    <a href="\tags\Archtacture" title="Archtacture"><div class="tags-list-item">Archtacture</div></a>
-    
-    <a href="\tags\Rocks" title="Rocks"><div class="tags-list-item">Rocks</div></a>
+    <a href="\tags\Bash" title="Bash"><div class="tags-list-item">Bash</div></a>
     
     <a href="\tags\Arch Manjaro Kernel" title="Arch Manjaro Kernel"><div class="tags-list-item">Arch Manjaro Kernel</div></a>
     
-    <a href="\tags\Bash" title="Bash"><div class="tags-list-item">Bash</div></a>
+    <a href="\tags\Rocks" title="Rocks"><div class="tags-list-item">Rocks</div></a>
+    
+    <a href="\tags\Oracle" title="Oracle"><div class="tags-list-item">Oracle</div></a>
+    
+    <a href="\tags\Archtacture" title="Archtacture"><div class="tags-list-item">Archtacture</div></a>
     
   </div>
 </div>
